@@ -1,0 +1,4 @@
+[submodule "cmc_msu_contests"]
+	path = cmc_msu_contests
+	url = https://github.com/Mr-S-Mirzoev/cmc_msu_contests
+	branch = master
