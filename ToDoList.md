@@ -4,3 +4,5 @@
 2. Change boost testing with microbenchmarking.
 
 # Second priority
+
+1. Parse problem statement in AV Soft tasks in two different pdfs
