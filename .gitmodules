@@ -2,3 +2,7 @@
 	path = cmc_msu_contests
 	url = https://github.com/Mr-S-Mirzoev/cmc_msu_contests
 	branch = master
+[submodule "CPP-Sandbox"]
+	path = CPP-Sandbox
+	url = https://github.com/Mr-S-Mirzoev/CPP-Sandbox.git
+	branch = master
