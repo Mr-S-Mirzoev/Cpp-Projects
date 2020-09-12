@@ -14,7 +14,9 @@ The reason behind this was the difference in system call structure after 4.17 ve
 
 - Whether structure is used or explicit parameters are used is determined as specified or not specified macro CAST
 
-- The order in which elements are defined in struct is defined via STRUCTURE_FIELD1 .. STRUCTURE_FIELD6 . For example, for struct a:
+- The order in which elements are defined in struct is defined via STRUCTURE_FIELD1 .. STRUCTURE_FIELD6 
+        
+        // For example, for struct a:
 
         struct a
         {
@@ -25,7 +27,7 @@ The reason behind this was the difference in system call structure after 4.17 ve
             long long t;
         };
         
-we would define macros as:
+        // we would define macros as:
 
         #define STRUCTURE_FIELD1 c
         #define STRUCTURE_FIELD2 d
