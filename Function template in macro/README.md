@@ -36,7 +36,7 @@ The reason behind this was the difference in system call structure after 4.17 ve
         #define STRUCTURE_FIELD5 t
         #define STRUCTURE_FIELD6 g
 
-::::::::::::::::EXAMPLE::::::::::::::::
+## EXAMPLE
 
 Let's say we have defined the following macros:
 
