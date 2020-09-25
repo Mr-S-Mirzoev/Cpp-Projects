@@ -3,7 +3,7 @@
 	url = https://github.com/Mr-S-Mirzoev/cmc_msu_contests
 	branch = master
 [submodule "CPP-Sandbox"]
-	path = CPP-Sandbox
+	path = A testing ground for C++ capabilities
 	url = https://github.com/Mr-S-Mirzoev/CPP-Sandbox.git
 	branch = master
 [submodule "TechnoSphere Task"]
