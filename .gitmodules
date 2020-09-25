@@ -6,3 +6,6 @@
 	path = CPP-Sandbox
 	url = https://github.com/Mr-S-Mirzoev/CPP-Sandbox.git
 	branch = master
+[submodule "TechnoSphere Task"]
+	path = TechnoSphere Task
+	url = git@github.com:Mr-S-Mirzoev/TechnoSphere-Task.git
