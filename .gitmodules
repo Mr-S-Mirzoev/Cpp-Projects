@@ -1,5 +1,5 @@
 [submodule "cmc_msu_contests"]
-	path = cmc_msu_contests
+	path = Solutions for Contests at CMC MSU
 	url = https://github.com/Mr-S-Mirzoev/cmc_msu_contests
 	branch = master
 [submodule "CPP-Sandbox"]
