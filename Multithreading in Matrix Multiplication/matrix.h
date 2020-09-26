@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <thread>
-#include "thread_pool.h"
+#include "Deps/ctpl_stl.h"
 #include "random.h"
 
 template <typename T>
@@ -20,7 +20,7 @@ class Matrix
     */
     unsigned h, l;
     std::vector <T> *rows;
-    static void multiplication_i_j(T &res, Matrix &a, Matrix &b, unsigned i, unsigned j) {
+    static void multiplication_i_j(T& res, Matrix &a, Matrix &b, unsigned i, unsigned j) {
         res = T();
         for (unsigned k = 0; k < a.l; ++k)
             res += a[i][k] * b[k][j];
@@ -43,10 +43,13 @@ public:
         Matrix <T> c(a.h, b.l);
         if (threads_q) {
             // Create threads at requested quantity, by the idea - number of cores + 1
-            ThreadPool p (threads_q);
+            ctpl::thread_pool p(threads_q);
+            std::vector<std::future<void>> results(c.h * c.l);
             for (unsigned i = 0; i < c.h; ++i) // Assigning c.h * c.l jobs
                 for (unsigned j = 0; j < c.l; ++j)
-                    p.doJob(std::bind(multiplication_i_j, std::ref(c[i][j]), std::ref(a), std::ref(b), i, j));
+                    results[i * c.l + j] = p.push(std::bind(multiplication_i_j, std::ref(c[i][j]), std::ref(a), std::ref(b), i, j));
+            for (unsigned i = 0; i < c.h * c.l; ++i)
+                results[i].get();
             // Thread Pool goes out of scope, so it is destroyed.
         } else {
             for (unsigned i = 0; i < c.h; ++i)
