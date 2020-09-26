@@ -20,10 +20,16 @@ class Matrix
     */
     unsigned h, l;
     std::vector <T> *rows;
-    static void multiplication_i_j(T& res, Matrix &a, Matrix &b, unsigned i, unsigned j) {
-        res = T();
+    static T multiplication_i_j(Matrix &a, Matrix &b, unsigned i, unsigned j) {
+        T res;
         for (unsigned k = 0; k < a.l; ++k)
             res += a[i][k] * b[k][j];
+        return res;
+    }
+    static void multiplication_rows(Matrix &c, Matrix &a, Matrix &b, unsigned i_start, unsigned i_finish) {
+        for (unsigned i = i_start; i < i_finish; ++i) 
+            for (unsigned j = 0; j < c.l; ++j)
+                c[i][j] = multiplication_i_j(a, b, i, j);
     }
 public:
     Matrix(unsigned h, unsigned l, bool random = false, T min = T(), T max = T()): l(l), h(h), rows(new std::vector <T>[h]) {
@@ -44,17 +50,21 @@ public:
         if (threads_q) {
             // Create threads at requested quantity, by the idea - number of cores + 1
             ctpl::thread_pool p(threads_q);
-            std::vector<std::future<void>> results(c.h * c.l);
-            for (unsigned i = 0; i < c.h; ++i) // Assigning c.h * c.l jobs
-                for (unsigned j = 0; j < c.l; ++j)
-                    results[i * c.l + j] = p.push(std::bind(multiplication_i_j, std::ref(c[i][j]), std::ref(a), std::ref(b), i, j));
-            for (unsigned i = 0; i < c.h * c.l; ++i)
+            unsigned load = ((c.h / threads_q) > 10) ? 10 : (c.h / threads_q);
+            unsigned quantity = (c.h % load) ? unsigned(floor(c.h / load)) + 1 :  unsigned(floor(c.h / load));
+            std::vector<std::future<void>> results(quantity);
+            unsigned k = 0;
+            for (unsigned i = 0; i < c.h; i += load) {
+                results[k] = p.push(std::bind(multiplication_rows, std::ref(c), std::ref(a), std::ref(b), i, (i + 10 < c.h) ? i + 10 : c.h));
+                ++k;
+            }
+            for (unsigned i = 0; i < k; ++i)
                 results[i].get();
             // Thread Pool goes out of scope, so it is destroyed.
         } else {
             for (unsigned i = 0; i < c.h; ++i)
                 for (unsigned j = 0; j < c.l; ++j)
-                    multiplication_i_j(c[i][j], a, b, i, j);
+                    c[i][j] = multiplication_i_j(a, b, i, j);
         }
         return c;
     }

@@ -59,6 +59,11 @@
         "ratio": "cpp",
         "mutex": "cpp",
         "stop_token": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "bitset": "cpp",
+        "list": "cpp",
+        "set": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     }
 }
