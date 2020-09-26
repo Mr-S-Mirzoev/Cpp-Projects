@@ -55,35 +55,35 @@ After I used an implemented thread pool from https://github.com/vit-vit/ctpl and
 
 1. I got stuck when it came to the situation where I had only 1 and two threads and two threads were working worse than 1
 
-    2020-09-26T12:42:03+03:00
-    Running ./benchmark.out
-    Run on (4 X 2300 MHz CPU s)
-    CPU Caches:
-      L1 Data 32 KiB (x2)
-      L1 Instruction 32 KiB (x2)
-      L2 Unified 256 KiB (x2)
-      L3 Unified 4096 KiB (x1)
-    Load Average: 1.72, 1.66, 1.99
-    -------------------------------------------------------------------------------------
-    Benchmark                                           Time             CPU   Iterations
-    -------------------------------------------------------------------------------------
-    BM_ParallelOnOneThread/iterations:1000000       68690 ns        59237 ns      1000000
-    BM_ParallelOnTwoThreads/iterations:1000000     208321 ns       136133 ns      1000000
+        2020-09-26T12:42:03+03:00
+        Running ./benchmark.out
+        Run on (4 X 2300 MHz CPU s)
+        CPU Caches:
+          L1 Data 32 KiB (x2)
+          L1 Instruction 32 KiB (x2)
+          L2 Unified 256 KiB (x2)
+          L3 Unified 4096 KiB (x1)
+        Load Average: 1.72, 1.66, 1.99
+        -------------------------------------------------------------------------------------
+        Benchmark                                           Time             CPU   Iterations
+        -------------------------------------------------------------------------------------
+        BM_ParallelOnOneThread/iterations:1000000       68690 ns        59237 ns      1000000
+        BM_ParallelOnTwoThreads/iterations:1000000     208321 ns       136133 ns      1000000
 
 2. After looking at this [Stack Overflow page](https://stackoverflow.com/questions/52831254/multi-threading-benchmarking-issues) I realised why this happens and decided to change dimensions to the count of 50 by 50. Although result wasn't great again...
 
-    Load Average: 2.28, 2.64, 3.19
-    ------------------------------------------------------------------------------------------
-    Benchmark                                                Time             CPU   Iterations
-    ------------------------------------------------------------------------------------------
-    BM_ParallelOnProcCountMinusOne/iterations:10000   61004143 ns     33294763 ns        10000
-    BM_ParallelOnProcCount/iterations:10000           61539081 ns     33829332 ns        10000
-    BM_Normal/iterations:10000                          411272 ns       410019 ns        10000
+        Load Average: 2.28, 2.64, 3.19
+        ------------------------------------------------------------------------------------------
+        Benchmark                                                Time             CPU   Iterations
+        ------------------------------------------------------------------------------------------
+        BM_ParallelOnProcCountMinusOne/iterations:10000   61004143 ns     33294763 ns        10000
+        BM_ParallelOnProcCount/iterations:10000           61539081 ns     33829332 ns        10000
+        BM_Normal/iterations:10000                          411272 ns       410019 ns        10000
 
 3. So I decided to work with a bench of data (roughly splitting all the data between threads at the begining of programm). The formula was as follows: 
 
-    unsigned load = ((c.h / threads_q) > 10) ? 10 : (c.h / threads_q);
-    unsigned quantity = (c.h % load) ? unsigned(floor(c.h / load)) + 1 :  unsigned(floor(c.h / load));
+        unsigned load = ((c.h / threads_q) > 10) ? 10 : (c.h / threads_q);
+        unsigned quantity = (c.h % load) ? unsigned(floor(c.h / load)) + 1 :  unsigned(floor(c.h / load));
 
   Results now seemed more like fun:) 
 
