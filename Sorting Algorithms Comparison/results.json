@@ -1,0 +1,64 @@
+{
+  "context": {
+    "date": "2020-10-02T10:45:30+03:00",
+    "host_name": "MacBook-Pro-Polina.local",
+    "executable": "./mybenchmark",
+    "num_cpus": 4,
+    "mhz_per_cpu": 2300,
+    "cpu_scaling_enabled": false,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 4194304,
+        "num_sharing": 4
+      }
+    ],
+    "load_avg": [2.11914,2.25586,2.14111],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_StringCreation",
+      "run_name": "BM_StringCreation",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 42029673,
+      "real_time": 1.6417519926418311e+01,
+      "cpu_time": 1.6407550922416167e+01,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_StringCopy",
+      "run_name": "BM_StringCopy",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 85222431,
+      "real_time": 8.1817718270726214e+00,
+      "cpu_time": 8.1787739662108461e+00,
+      "time_unit": "ns"
+    }
+  ]
+}

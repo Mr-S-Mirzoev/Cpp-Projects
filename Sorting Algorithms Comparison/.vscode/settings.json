@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "iomanip": "cpp",
+        "iosfwd": "cpp",
+        "exception": "cpp",
+        "stdexcept": "cpp",
+        "ostream": "cpp"
+    }
+}
