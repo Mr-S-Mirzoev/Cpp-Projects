@@ -4,6 +4,7 @@
 #include "Dependencies/sequence.hpp"
 #include "Dependencies/random.hpp"
 #include "swap.hpp"
+#include "isorter.hpp"
 
 #include <functional>
 #include <iostream>
@@ -14,36 +15,37 @@
    all smaller (smaller than pivot) to left 
    of pivot and all greater elements to  
    right of pivot */
-template <typename T, typename Comparator> // Compare returns true if a <= b
-int partition(Lab::Sequence<T> *arr, int l, int h, const Comparator &cmp) 
-{
-    T x = arr->Get(h); 
-    int i = l - 1; 
-  
-    for (int j = l; j <= h - 1; j++) { 
-        if (cmp(arr->Get(j), x)) { 
-            ++i;
-            swap(arr, i, j); 
+template <typename T> // Compare returns true if a <= b
+class QuickSorter: public ISorter<T> {
+    int partition(Lab::Sequence<T> *_sequence, int l, int h, int (*cmp) (T,T)) 
+    {
+        T x = _sequence->Get(h); 
+        int i = l - 1; 
+    
+        for (int j = l; j <= h - 1; j++) { 
+            if (cmp(_sequence->Get(j), x) <= 0) { 
+                ++i;
+                swap(_sequence, i, j); 
+            } 
         } 
+        swap(_sequence, i + 1, h); 
+        return (i + 1); 
     } 
-    swap(arr, i + 1, h); 
-    return (i + 1); 
-} 
-  
-template <typename T, typename Comparator>
-void quickSort_Worker(Lab::Sequence<T> *A, int l, int h, const Comparator &c) 
-{
-    if (l < h) { 
-        /* Partitioning index */
-        int p = partition<T, Comparator>(A, l, h, c); 
-        quickSort_Worker(A, l, p - 1, c); 
-        quickSort_Worker(A, p + 1, h, c); 
-    } 
-} 
 
-template <typename T, typename Comparator>
-void quickSort(Lab::Sequence<T> *A, const Comparator &c) {
-    quickSort_Worker(A, 0, A->GetSize() - 1, c);
-}
+    void quickSort_Worker(Lab::Sequence<T> *a, int l, int h, int (*cmp) (T,T)) 
+    {
+        if (l < h) { 
+            /* Partitioning index */
+            int p = partition(a, l, h, cmp); 
+            quickSort_Worker(a, l, p - 1, cmp); 
+            quickSort_Worker(a, p + 1, h, cmp); 
+        } 
+    }
+public:
+    Lab::Sequence<T> *sort(Lab::Sequence<T> *a, int (*cmp) (T,T)) override {
+        quickSort_Worker(a, 0, a->GetSize() - 1, cmp);
+        return a;
+    }
+};
 
 #endif

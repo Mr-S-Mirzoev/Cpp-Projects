@@ -3,24 +3,26 @@
 
 #include "Dependencies/sequence.hpp"
 #include "Dependencies/random.hpp"
-
+#include "isorter.hpp"
 #include "swap.hpp"
 
 #include <functional>
 #include <iostream>
 
-template <typename T, typename Comparator>
-void shellSort_Worker(Lab::Sequence<T> *A, int first, int last, const Comparator &comp) {
-    for (int d = (last - first) / 2; d != 0; d /= 2 )
-//нужен цикл для first = a[0..d-1]
-        for (int i = first + d; i != last; ++i)
-            for (int j = i; j - first >= d && comp(A->Get(j), A->Get(j - d)); j -= d)
-                swap (A, j, j - d);
-}
-
-template <typename T, typename Comparator>
-void shellSort(Lab::Sequence<T> *A, const Comparator &c) {
-    shellSort_Worker(A, 0, A->GetSize(), c);
-}
+template <typename T>
+class ShellSorter: public ISorter<T> {
+    void shellSort_Worker(Lab::Sequence<T> *_sequence, int first, int last, int (*cmp) (T,T)) {
+        for (int d = (last - first) / 2; d != 0; d /= 2 )
+            for (int i = first + d; i != last; ++i)
+                for (int j = i; j - first >= d && cmp(_sequence->Get(j), _sequence->Get(j - d)) <= 0; j -= d)
+                    swap (_sequence, j, j - d);
+    }
+public:
+    Lab::Sequence<T> *sort(Lab::Sequence<T> *_sequence, int (*cmp) (T,T)) override {
+        Lab::Sequence<T> *x = _sequence->GetSubSequence(0, _sequence->GetSize());
+        shellSort_Worker(x, 0, _sequence->GetSize(), cmp);
+        return x;
+    }
+};
 
 #endif

@@ -4,6 +4,7 @@
 #include "random_sequence.hpp"
 #include "shellsort.hpp"
 #include "timer.hpp"
+#include "test.hpp"
 
 #include <cstdlib>
 #include <fstream>
@@ -13,12 +14,15 @@
 int main() {
     int n = getRand(5, 20);
     Lab::Sequence<int> *a = new Lab::ArraySequence<int>; 
-    SetRandomList<int>(a, -20.0, 20.0, n);
-    Timer t;
-    shellSort(a, std::greater<int>());
-    std::cout << t.pause() << std::endl;
-    t.reset();
-    a->Print();
-    std::cout << t.pause() << std::endl;
+    SetRandomList<int>(a, -20, 20, n);
+    std::string s;
+    std::cin >> s;
+    std::cout << s << std::endl;
+    ISorter<int> *ss = new ShellSorter<int>;
+    CheckSortCorrectnessManual csc(ss, a, [](int x, int y) { return (x - y); });
+    csc.check();
+    std::cout << (csc._correct ? "true" : "false") << std::endl;
+    //a->Print();
+    //ss.sort(a, [](int x, int y) { return (x - y); })->Print();
     return 0; 
 }
