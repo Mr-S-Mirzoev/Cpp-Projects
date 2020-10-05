@@ -33,25 +33,21 @@ private:
 
 // Doesn't follow RAII as dealing with I/O in class constructor is bad.
 class CheckSortCorrectnessManual: public CorrectnessTest {
-    ISorter<int> *_sort;
-    Lab::Sequence <int> *_sequence;
-    int (*_cmp) (int,int);
 public:
-    CheckSortCorrectnessManual(ISorter<int> *s, Lab::Sequence <int> *sequence, int (*cmp) (int,int)): _sort(s), _cmp(cmp), _sequence(sequence) {}
-    bool check() {
-        _sequence->Print();
-        _sort->sort(_sequence, _cmp)->Print();
+    CheckSortCorrectnessManual(ISorter<int> *s, Lab::Sequence <int> *sequence, int (*cmp) (int,int)) {
+        auto *a = s->sort(sequence, cmp);
+        a->Print();
 
         std::cout << "Is it sorted? (yes/no)" << std::endl;
-        std::string s;
-        std::cin >> s;
+        std::string str;
+        std::getline(std::cin, str);
 
-        while (s != "yes" && s != "no") {
+        while (str != "yes" && str != "no") {
             std::cout << "You've entered the wrong value." <<
                         " Try again with \"yes\" or \"no\"" << std::endl;
-            std::cin >> s;
+            std::getline(std::cin, str);
         }
-        return (s == "yes");
+        _correct = (str == "yes"); 
     }
 };
 

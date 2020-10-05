@@ -3,6 +3,7 @@
 
 #include "exceptions.hpp"
 #include <ostream>
+#include <initializer_list>
 
 namespace Lab {
     template <typename T> 

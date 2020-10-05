@@ -5,6 +5,7 @@
 #include "shellsort.hpp"
 #include "timer.hpp"
 #include "test.hpp"
+#include "interface.hpp"
 
 #include <cstdlib>
 #include <fstream>
@@ -12,6 +13,7 @@
 #include <iomanip>
 
 int main() {
+    /*
     int n = getRand(5, 20);
     Lab::Sequence<int> *a = new Lab::ArraySequence<int>; 
     SetRandomList<int>(a, -20, 20, n);
@@ -22,7 +24,10 @@ int main() {
     CheckSortCorrectnessManual csc(ss, a, [](int x, int y) { return (x - y); });
     csc.check();
     std::cout << (csc._correct ? "true" : "false") << std::endl;
-    //a->Print();
-    //ss.sort(a, [](int x, int y) { return (x - y); })->Print();
+    */
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        act(line);
+    }
     return 0; 
 }
