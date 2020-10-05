@@ -9,8 +9,6 @@
 #include "triangle_matrix.hpp"
 #include "interface.hpp"
 
-
-
 void testDynamicArray () {
     // Example of work of Dynamic Array
     std::cout << std::endl << "DYNAMIC ARRAY:" << std::endl << "Constructors:" << std::endl;
