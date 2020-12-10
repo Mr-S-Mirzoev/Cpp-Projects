@@ -25,6 +25,16 @@ or
 
 Note that you can move binary file ./build/deutsch wherever you wish.
 
+# In the file
+
+  Hit
+
+    start TRAINING::CLASSIC
+
+  to start classic training.
+
+  Currently to finish training hit SIGINT (To be changed)
+
 # Special thanks:
 
 [Ben Strasser's Fast C++ CSV reader](https://github.com/ben-strasser/fast-cpp-csv-parser)
