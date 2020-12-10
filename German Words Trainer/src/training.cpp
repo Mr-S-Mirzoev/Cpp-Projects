@@ -10,5 +10,6 @@ void Training::interrupt() {
 }
 
 void sig_handler(int signum) {
-    current_training->interrupt();
+    if (current_training)
+        current_training->interrupt();
 }
