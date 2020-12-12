@@ -1,7 +1,7 @@
 #include "classic_training.hpp"
+#include "utilities.hpp"
 
 #include <iostream>
-#include <random>
 
 extern Training *current_training;
 
@@ -18,9 +18,7 @@ void ClassicTraining::spin() {
     for (auto &word : _database) {
         double lower_bound = 0.0;
         double upper_bound = 1.0;
-        std::uniform_real_distribution<double> unif(lower_bound,upper_bound);
-        std::default_random_engine re;
-        double a_random_double = unif(re);
+        double a_random_double = thread_safe_rand(lower_bound, upper_bound);
         std::string input;
         if (a_random_double <= PROBABILITY_OF_GERMAN) {
             std::cout << "What is the equivalent for a german word \"" << word.get_deutsch();
