@@ -9,3 +9,6 @@
 [submodule "TechnoSphere Task"]
 	path = TechnoSphere Task
 	url = git@github.com:Mr-S-Mirzoev/TechnoSphere-Task.git
+[submodule "Huobi-Analyzer"]
+	path = Huobi-Analyzer
+	url = git@github.com:Mr-S-Mirzoev/Huobi-Analyzer.git
