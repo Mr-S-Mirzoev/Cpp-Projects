@@ -4,7 +4,7 @@
 #include <exception>
 #include <string>
 
-class DeutschBaseException: public std::exception {
+class DeutschBaseException: public std::runtime_error {
 public:
     DeutschBaseException(const std::string &what);
 };
