@@ -6,8 +6,8 @@
 
 class DeutschBaseException: public std::exception {
 public:
-    DeutschBaseException(const std::string &what) = default;
-}
+    DeutschBaseException(const std::string &what);
+};
 
 class DeutschTypeAssertException: public DeutschBaseException
 {
