@@ -12,3 +12,6 @@
 [submodule "Huobi-Analyzer"]
 	path = Huobi-Analyzer
 	url = git@github.com:Mr-S-Mirzoev/Huobi-Analyzer.git
+[submodule "TechnoSphere"]
+	path = TechnoSphere
+	url = git@github.com:Mr-S-Mirzoev/TechnoSphere.git
