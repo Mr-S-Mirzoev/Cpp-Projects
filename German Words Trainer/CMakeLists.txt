@@ -17,6 +17,8 @@ set(TARGET_NAME deutsch)
 # All the sources to be linked
 set(SOURCE_FILES ${SRC_DIR}/deutsch.cpp
                  ${SRC_DIR}/database.cpp
+		 ${SRC_DIR}/exceptions.cpp
+		 ${SRC_DIR}/utilities.cpp
                  ${SRC_DIR}/training.cpp
                  ${SRC_DIR}/classic_training.cpp
                  ${SRC_DIR}/runner.cpp
