@@ -15,3 +15,6 @@
 [submodule "TechnoSphere"]
 	path = TechnoSphere
 	url = git@github.com:Mr-S-Mirzoev/TechnoSphere.git
+[submodule "Better Language/lib/termbox"]
+	path = Better Language/lib/termbox
+	url = https://github.com/nsf/termbox.git
