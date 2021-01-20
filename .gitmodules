@@ -6,9 +6,6 @@
 	path = A testing ground for C++ capabilities
 	url = https://github.com/Mr-S-Mirzoev/CPP-Sandbox.git
 	branch = master
-[submodule "TechnoSphere Task"]
-	path = TechnoSphere Task
-	url = git@github.com:Mr-S-Mirzoev/TechnoSphere-Task.git
 [submodule "Huobi-Analyzer"]
 	path = Huobi-Analyzer
 	url = git@github.com:Mr-S-Mirzoev/Huobi-Analyzer.git
