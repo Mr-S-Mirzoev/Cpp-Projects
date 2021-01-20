@@ -21,7 +21,7 @@
     ├── Red&Black tree - `june 2020`
     ├── Solutions for Contests at CMC MSU - `2019 - 2020`
     ├── Sorting Algorithms Comparison
-    ├── TechnoSphere - `autumn 2020` : TechnoSphere project solutions
+    └── TechnoSphere - `autumn 2020` : TechnoSphere project solutions
         ├── 0. Interview
         ├── 1. Process
         ├── 2. Logger
