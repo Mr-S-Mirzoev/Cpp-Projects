@@ -28,3 +28,6 @@
         ├── 3. TCP Server
         └── Dependencies
 
+# ToDo:
+
+Check Qt [Tutorials](https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/tutorials?h=5.15)
