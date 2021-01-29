@@ -1,5 +1,9 @@
 # Problem "Median of two vectors"
 
+## Link to the problem
+
+To see the problem on leetcode website, go [here](https://leetcode.com/problems/median-of-two-sorted-arrays/)
+
 ## Description
 
     Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
