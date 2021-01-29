@@ -7,3 +7,8 @@
 
 1. Parse problem statement in AV Soft tasks in two different pdfs
 2. Add input support for Leetcode problems
+
+# Third priority (Structural)
+
+1. Move [folder](Function%20template%20in%20macro) to C-Projects.
+2. Add interesting problems to front readme. Delete useless stuff
