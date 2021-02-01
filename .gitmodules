@@ -1,17 +1,6 @@
-[submodule "cmc_msu_contests"]
-	path = Solutions for Contests at CMC MSU
-	url = https://github.com/Mr-S-Mirzoev/cmc_msu_contests
-	branch = master
-[submodule "CPP-Sandbox"]
-	path = A testing ground for C++ capabilities
-	url = https://github.com/Mr-S-Mirzoev/CPP-Sandbox.git
-	branch = master
 [submodule "Huobi-Analyzer"]
 	path = Huobi-Analyzer
 	url = git@github.com:Mr-S-Mirzoev/Huobi-Analyzer.git
 [submodule "TechnoSphere"]
 	path = TechnoSphere
 	url = git@github.com:Mr-S-Mirzoev/TechnoSphere.git
-[submodule "Better Language/lib/termbox"]
-	path = Better Language/lib/termbox
-	url = https://github.com/nsf/termbox.git

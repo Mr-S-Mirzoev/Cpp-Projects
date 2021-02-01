@@ -1,4 +1,13 @@
-Task2 was messy and unreadable, so I decided to move everything in the structure to the headers.
-Compile this code as follows:
+# Readers and Writers problem
 
-    g++ invoker.cpp commands.cpp xmlhandler.cpp company.cpp department.cpp  workerinfo.cpp task2.cpp -o task2 -std=c++11
+## Problem statement
+
+You need to implement a reader-writer process interaction scheme under Linux using the appropriate Linux Kernel API system calls and multithreading, using threads and muteces. The priority can be any. Threads must share a common address space.
+
+The number of readers, writers, program repeats, and time delays are set by the preprocessor directives.  Ensure that the results of the work of readers and writers are displayed on the screen.
+
+
+## How to build
+
+    g++ task1.cpp -std=c++11 -o readers-writers
+    ./readers-writers
