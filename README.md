@@ -9,7 +9,6 @@
     │   ├── intersection
     │   └── moderncpp
     ├── Command Design Pattern - `may 2020`: design patter command
-    ├── Function template in macro - `august 2020`: function template for C as a C++ template
     ├── German Words Trainer - `december 2020`: german language trainer
     │   ├── Graphical Interface Version
     │   ├── Termbox (ncurses) version

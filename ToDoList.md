@@ -10,5 +10,4 @@
 
 # Third priority (Structural)
 
-1. Move [folder](Function%20template%20in%20macro) to C-Projects.
-2. Add interesting problems to front readme. Delete useless stuff
+1. Add interesting problems to front readme. Delete useless stuff
