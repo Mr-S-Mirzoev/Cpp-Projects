@@ -5,8 +5,7 @@
 
 # Second priority
 
-1. Parse problem statement in AV Soft tasks in two different pdfs
-2. Add input support for Leetcode problems
+1. Add input support for Leetcode problems
 
 # Third priority (Structural)
 
