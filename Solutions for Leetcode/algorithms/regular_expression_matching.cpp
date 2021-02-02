@@ -1,9 +1,12 @@
+#include <iostream>
+#include <string>
+
 class Solution {
 public:
-    bool isMatch(string s, string p) {
+    bool isMatch(std::string s, std::string p) {
         return match(s, 0, p, 0);
     }
-    
+private:
     bool match(std::string s, int i, std::string p, int j) {
         if (j == p.length())  // if it's the end of pattern, it should be end of string too.
             return i == s.length();
@@ -37,3 +40,13 @@ public:
         
     }
 };
+
+
+int main(int argc, char const *argv[])
+{
+    Solution s;
+    std::string str = "aa", ptrn = "a";
+    std::cout << "Matching string \"" << str << "\" with pattern \"" << ptrn << "\"" << std::endl;
+    std::cout << std::boolalpha << s.isMatch(str, ptrn) << std::endl;
+    return 0;
+}

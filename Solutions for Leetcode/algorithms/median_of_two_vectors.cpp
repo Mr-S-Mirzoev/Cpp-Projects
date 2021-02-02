@@ -1,5 +1,16 @@
-#include <vector>
+#include <algorithm>
 #include <iostream>
+#include <iterator>
+#include <vector>
+
+template<typename T>
+std::ostream & operator<<(std::ostream & os, std::vector<T> vec)
+{
+    os << "{ ";
+    std::copy(vec.begin(), vec.end(), std::ostream_iterator<T>(os, " "));
+    os << "}";
+    return os;
+}
 
 class Solution {
 public:
@@ -55,6 +66,11 @@ int main(int argc, char const *argv[])
     std::vector<int> v2 {};
 
     double res = s.findMedianSortedArrays(v1, v2);
+
+    std::cout << "Finding median of sorted arrays: " << std::endl;
+
+    std::cout << "First vector: " << v1 << std::endl;
+    std::cout << "Second vector: " << v2 << std::endl;
     
     std::cout << "Result: " << res << std::endl;
     return 0;

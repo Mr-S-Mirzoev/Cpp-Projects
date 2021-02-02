@@ -1,5 +1,9 @@
 Sorting Algorithms Comparison/sort
 Sorting Algorithms Comparison/Dependencies/benchmark
-*/build/
 German Words Trainer/out.csv
-build-*-Debug/
+
+# CMake tmp files and directories
+*build/
+*bin/
+*CMakeCache.txt
+*CMakeFiles
