@@ -52,13 +52,12 @@ To find them we'll look on all ascending vectors with designated sum.
 
 We'll go recursively, having in each recursion such loop:
 
-    for (i in [previous_lowest, sum_left/length_left]):
+    for i in [previous_lowest, sum_left/length_left]:
         overall += quantity_of_numbers_with_sum(sum - i, length - 1, concat(s, 'i'));
-    }
 
 And when we reach length of 1 we'll have the only digit which could satisfy us. Since we have all the vector now, we'll count the permutations on it:
 
-    if (length_left == 1):
+    if length_left == 1:
         return permutations_on_set(s + 'last');
 
 Why were we iterating from prev_lowest? Because the vector is ascending.
