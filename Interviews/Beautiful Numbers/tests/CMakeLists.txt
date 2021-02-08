@@ -1,8 +1,11 @@
-# Locate GTest
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
- 
-# Link runTests with what we want to test and the GTest and pthread library
-add_executable(runTests factorial_tests.cpp)
+set(BINARY ${CMAKE_PROJECT_NAME}_tst)
 
-target_link_libraries(runTests ${LIBRARY_NAME} ${GTEST_LIBRARIES} pthread)
+file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cpp)
+
+set(SOURCES ${TEST_SOURCES})
+
+add_executable(${BINARY} ${TEST_SOURCES})
+
+add_test(NAME ${BINARY} COMMAND ${BINARY})
+
+target_link_libraries(${BINARY} PUBLIC ${LIBRARY_NAME} gtest pthread)
