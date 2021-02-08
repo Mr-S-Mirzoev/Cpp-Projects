@@ -14,5 +14,10 @@ int main() {
         result_for_all_sums += quantity_of_numbers_with_sum(sum);
     }
 
-    std::cout << std::pow(result_for_all_sums, 2) << std::endl;
+    auto result = std::pow(result_for_all_sums, 2);
+
+    std::cout << std::scientific;
+    std::cout << "In scientific notation: " << result << std::endl;
+    std::cout << std::fixed;
+    std::cout << "In usual notation: " << result << std::endl;
 }

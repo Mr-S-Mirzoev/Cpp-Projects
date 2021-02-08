@@ -12,7 +12,7 @@ set(SRC_DIR ${DIR}/src)
 set(TEST_DIR ${DIR}/tests)
 
 # Executable name
-set(LIBRARY_NAME beautiful_numbers)
+set(LIBRARY_NAME beautynumbers_support)
 
 # All the sources to be linked
 set(SOURCE_FILES
@@ -29,7 +29,7 @@ add_library(${LIBRARY_NAME} SHARED ${SOURCE_FILES})
 target_include_directories(${LIBRARY_NAME} PUBLIC ${INC_DIR})
 
 # Executable name
-set(TARGET_NAME all_beautiful_numbers)
+set(TARGET_NAME ${CMAKE_PROJECT_NAME})
 
 set(SOURCE_FILES
     ${SRC_DIR}/solution.cpp
