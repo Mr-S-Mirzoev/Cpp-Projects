@@ -1,12 +1,8 @@
-# First priority
+# First priority (Logical)
 
-1. Add info about every submodule and subfolder in README.md
-2. Change boost testing with microbenchmarking.
+1. Change boost testing with microbenchmarking.
+2. Add interesting problems to front readme. Delete useless stuff
 
-# Second priority
-
-1. Add input support for Leetcode problems
+# Second priority (Progmatical)
 
 # Third priority (Structural)
-
-1. Add interesting problems to front readme. Delete useless stuff
