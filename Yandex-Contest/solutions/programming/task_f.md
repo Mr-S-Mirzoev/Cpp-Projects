@@ -1,22 +1,20 @@
 # Definition
 
-In this task, you need to find the number of the line containing the error.
-Below is the pseudocode for solving the following problem.
-*m* delivery orders are given. Each order is described by two time points: *start*, *finish* (in the HH:MM:SS format). Once the courier starts executing an order, the courier cannot execute any other order in the interval between *start* and *finish*.
+В этом задании необходимо найти номер строки, содержащей ошибку.
+Ниже приведен псевдокод решения следующей задачи.
+Даны *m* заказов на доставку. Каждый заказа описывается двумя моментами времени: *start*, *finish* (в формате HH:MM:SS). Как только курьер начинает выполнение заказа, курьер не может выполнять никакой другой заказ в интервале между *start* и *finish*. 
 
-Determine the minimum number of couriers that will be required to complete all* m * orders.
+Определите минимальное количество курьеров, которые потребуются для выполнения всех *m* заказов.
 
-Consider an example:
+Рассмотрим пример:
+Если m=4 и 
+start1=08:00:00, finish1=11:00:00,
+start2=09:00:00, finish2=10:00:00,
+start3=10:00:00, finish3=11:10:00,
+start4=10:59:59, finish4=13:00:00.
 
-If m=4 and
-start 1=08: 00:00, finish 1=11:00:00,
-start 2=09:00:00, finish 2=10:00:00,
-start 3=10:00:00, finish 3=11:10:00,
-start 4=10:59:59, finish 4=13:00:00.
-
-One courier can complete 2 orders (2nd and 3rd or 2nd and 4th), two couriers can deliver 3 orders, and three couriers can deliver all 4 orders.
-Please note that the courier can take a new order immediately after the completion of the previous one.
-
+Один курьер может выполнить 2 заказа (2-й и 3-й или 2-й и 4-й), два курьера могут доставить 3 заказа, а три курьера могут доставить все 4 заказа.
+Обратите внимание, что курьер может взять новый заказ сразу после окончания выполнения предыдущего.
  
     # read input:  
     # read number of orders to deliver from first row of the input into m  
@@ -45,8 +43,9 @@ Please note that the courier can take a new order immediately after the completi
     18.  
     19. return used_couriers
 
-Note: `Error` can correspond to any situation where the program (algorithm) gives an incorrect answer, the pseudocode can be corrected by changing, deleting or adding several characters in one line.
-Hint: The error is not syntactic, but in the correctness of the algorithm.
+
+Замечание: `Ошибка` может соответствовать любой ситуации, когда программа (алгоритм) выдает неверный ответ, псевдокод может быть исправлен изменением, удалением или добавлением нескольких символов в одной строке.
+Подсказка: Ошибка не синтаксическая, а в корректности алгоритма.
 
 # Answer
 
