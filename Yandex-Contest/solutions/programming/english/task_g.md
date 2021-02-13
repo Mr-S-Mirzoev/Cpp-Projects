@@ -1,6 +1,6 @@
 # Solution
 
-[File](task_g.cpp) with C++ solution
+[File](../task_g.cpp) with C++ solution
 
 # Definition
 
