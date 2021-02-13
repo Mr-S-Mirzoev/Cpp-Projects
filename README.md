@@ -22,13 +22,16 @@
     │   ├── Solutions for Contests at CMC MSU - `2019 - 2020`
     │   ├── Sorting Algorithms Comparison - `april 2020`
     │   └── STL Tutorial for beginners - `february 2020`
-    └── TechnoSphere - `autumn 2020` : Solutions for Mail.ru Course on C++
-        ├── 0. Interview
-        ├── 1. Process
-        ├── 2. Logger
-        ├── 3. TCP Server
-        └── Dependencies
-
-# ToDo:
-
-Check Qt [Tutorials](https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/tutorials?h=5.15)
+    ├── TechnoSphere - `autumn 2020` : Solutions for Mail.ru Course on C++
+    │   ├── 0. Interview
+    │   ├── 1. Process
+    │   ├── 2. Logger
+    │   ├── 3. TCP Server
+    │   └── Dependencies
+    └── Yandex-Contest-2021 - `february 2021` : Solution for Contest for Sirius.ML programm
+        ├── about
+        │   ├── english
+        │   └── russian
+        └── solutions
+            ├── maths
+            └── programming
