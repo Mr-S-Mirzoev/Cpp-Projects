@@ -28,7 +28,7 @@
     │   ├── 2. Logger
     │   ├── 3. TCP Server
     │   └── Dependencies
-    └── Yandex-Contest-2021 - `february 2021` : Solution for Contest for Sirius.ML programm
+    └── Yandex-Contest - `february 2021` : Solution for Contest for Sirius.ML programm
         ├── about
         │   ├── english
         │   └── russian
