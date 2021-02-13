@@ -1,53 +1,57 @@
+# Solution
+
+[File](task_g.cpp) with C++ solution
+
 # Definition
 
-    Ограничение времени	1 секунда
-    Ограничение памяти	64Mb
-    Ввод	стандартный ввод или input.txt
-    Вывод	стандартный вывод или output.txt
+    Time limit 1 second
+    The memory limit of 64Mb
+    Input standard input or input.txt
+    Output standard output or output.txt
 
-В этом задании необходимо написать код решения задачи про курьеров (детальное условие в соседней задаче).
-Замечание: Решение должно читать входные данные из STDIN или из файла input.txt (файл расположен в рабочей директории при запуске решения).
+In this task, you need to write the code for solving the problem about couriers (a detailed condition in the neighboring problem).
+Note: The solution must read the input data from STDIN or from a file input.txt (the file is located in the working directory when the solution is launched).
 
-**Формат ввода**
-Первая строка содержит целое число m (1≤m≤1000). В каждой из следующих m строк содержится по два момента времени start_i и finish_i в формате HH:MM:SS (00≤HH<24, 00≤MM<60, 00≤SS<60).
-Замечание: Во входных данных переводы строк в UNIX формате (Unix LF). https://en.wikipedia.org/wiki/Newline
+**Input format**
+The first line contains an integer m (1≤m≤1000). Each of the following m lines contains two time points start_i and finish_i in the format HH:MM:SS (00≤HH<24, 00≤MM<60, 00≤SS<60).
+Note: The input data contains line feeds in UNIX format (Unix LF). https://en.wikipedia.org/wiki/Newline
 
-**Формат вывода**
-Выведите одно целое число, минимальное количество курьеров.
+**The format of the output**
+Output a single integer, the minimum number of couriers.
 
-*Пример 1*
+*Example 1*
 
-Ввод:
+Input:
 4
 08:00:00 11:00:00
 09:00:00 10:00:00
 10:00:00 11:10:00
 10:59:59 13:00:00
 
-Вывод:
+Output:
 3
 
-*Пример 2*
-Ввод:
+*Example 2*
+Input:
 1
 08:00:00 09:00:00
 
-Вывод:
+Output:
 1
 
-*Пример 3*
-Ввод:
+*Example 3*
+Input:
 4
 08:00:00 13:00:00
 09:00:00 13:00:00
 10:00:00 13:00:00
 10:59:59 13:00:00
 
-Вывод:
+Output:
 4
 
-*Пример 4*
-Ввод:
+*Example 4*
+Input:
 10
 08:00:00 11:00:00
 08:00:00 11:00:00
@@ -60,5 +64,5 @@
 13:00:00 13:00:01
 13:00:00 13:00:01
 
-Вывод:
+Output:
 5

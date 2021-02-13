@@ -1,8 +1,12 @@
+# Solution
+
+[File](task_h.cpp) with C++ solution
+
 # Definition
 
-    Ограничение времени	3 секунды	15 секунд
-    Ограничение памяти	256Mb	256Mb
-    Ввод	стандартный ввод или input.txt
-    Вывод	стандартный вывод или output.txt
+    A time limit of 3 seconds, 15 seconds
+    Memory limit 256Mb 256Mb
+    Input standard input or input.txt
+    Output standard output or output.txt
 
-Оптимизируйте (если потребуется) ваше решение предыдущей задачи. Решение будет запущено на тестах с большими ограничениями: 1≤m≤250000.
+Optimize (if necessary) your solution to the previous problem. The solution will run on tests with large constraints: 1≤m≤250000.

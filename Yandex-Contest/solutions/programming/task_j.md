@@ -1,42 +1,46 @@
+# Solution
+
+[File](task_j.cpp) with C++ solution
+
 # Definition
     
-    Ограничение времени	1 секунда
-    Ограничение памяти	512Mb
-    Ввод	стандартный ввод или input.txt
-    Вывод	стандартный вывод или output.txt
+    Time limit 1 second
+    Memory limit 512Mb
+    Input standard input or input.txt
+    Output standard output or output.txt
 
-Петя придумал странный протокол передачи данных. Суть его в том, что, передавая верное сообщение 
-S, в поток данных ещё добавляются миллионы байт лишней информации. Предполагается, что злоумышленник голову сломает, пока найдёт нужную часть сообщения. Инновационно? Конечно!
-Для передачи секретного сообщения используется ключ — строка из цифр ABC, где A, B и C — некоторые целые положительные числа, удовлетворяющие соотношению A + B = C.
+Petya came up with a strange data transfer protocol. Its essence is that by transmitting the correct message 
+S, millions of bytes of extra information are added to the data stream. It is assumed that the attacker will break his head until he finds the right part of the message. Innovative? Of course!
+To transmit a secret message, a key is used — a string of digits ABC, where A, B, and C are some positive integers that satisfy the ratio A + B = C.
 
-Вася выделил часть переданного сообщения. Подтвердите, что его можно разбить на три части, чтобы получилось верное математическое равенство со сложением.
-Более формально, дано сообщение вида ABC, которое может быть представлено в виде математического тождества вида A+B=C, где A, B, C — некоторые целые положительные числа. Найдите это тождество.
+Vasya highlighted a part of the transmitted message. Confirm that it can be divided into three parts to get the correct mathematical equality with addition.
+More formally, a message of the form ABC is given, which can be represented as a mathematical identity of the form A+B=C, where A, B, C are some positive integers. Find this identity.
 
-Формат ввода:
-В единственной строке записано сообщение вида ABC, состоящее из цифр от 0 до 9. Длина строки не менее трёх символов и не превосходит ста символов.
+Input format:
+A single line contains a message of the form ABC, consisting of digits from 0 to 9. The line length is not less than three characters and does not exceed one hundred characters.
 
-Формат вывода:
-Выведите сообщение вида A+B=C. Таким образом, ответ должен отличаться от входной строки ровно на два вставленных символа — на один символ + и один символ =. Ведущие нули в десятичной записи чисел A, B и C
- не допускаются.
-Если существует несколько решений, выведите любое из ни	Выводх. Гарантируется, что по крайней мере одно решение существует.
+The format of the output:
+Output a message like A+B=C. Thus, the response must differ from the input string by exactly two inserted characters — one + character and one =character. Leading zeros in the decimal notation of the numbers A, B, and C
+are not allowed.
+If there are several solutions, output any of them. It is guaranteed that at least one solution exists.
 
-Пример 1
-Ввод:
+Example 1
+Input:
 123123246
 
-Вывод:
+Output:
 123+123=246
 
-Пример 2
-Ввод:
+Example 2
+Input:
 999108
 
-Вывод:
+Output:
 9+99=108
 
-Пример 3
-Ввод:
+Example 3
+Input:
 11111122
 
-Вывод:
+Output:
 11+111=122

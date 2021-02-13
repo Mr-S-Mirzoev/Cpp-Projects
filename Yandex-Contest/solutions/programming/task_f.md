@@ -1,3 +1,7 @@
+# Solution
+
+[File](task_f.cpp) with C++ solution
+
 # Definition
 
 In this task, you need to find the number of the line containing the error.
