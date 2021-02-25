@@ -11,18 +11,18 @@ int count_all(const std::string &s, int &i) {
             sum += count_all(s, i);
         } else {
             ++i;
-            if (count == 0) {
+            
+            if (count == 0)
                 return 1;
-            } else {
+            else
                 return sum * 2;
-            }
         }
     }
-    if (count == 0) {
+
+    if (count == 0)
         return 1;
-    } else {
+    else
         return sum * 2;
-    }
 }
 
 int root_count_all(const std::string &s, int &i) {
@@ -43,8 +43,7 @@ class Solution {
 public:
     int scoreOfParentheses(std::string input) {
         int i = 0;
-        int many = root_count_all(input, i);
-        return many;
+        return root_count_all(input, i);
     }
 };
 
