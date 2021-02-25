@@ -2,105 +2,81 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-/*
-class LeveledString
-{
+
+class TreeNode {
+    TreeNode *parent_;
+    std::vector <TreeNode *> childs_;
 public:
-    using level = int;
-private:
-    std::vector <std::pair<char, level>> data_;
-public:
-    LeveledString(const std::string &s) {
-        level l = 0;
-        for (char c : s) {
-            if (c == '(') {
-                ++l;
-            } else {
-                --l;
-            }
-            data_.push_back({c, l});
+    TreeNode(TreeNode *parent = nullptr): parent_(parent) {}
+    TreeNode* append() {
+        auto ptr = new TreeNode(this);
+        childs_.push_back(ptr);
+        return ptr;
+    }
+
+    TreeNode* get_parent() const {
+        return parent_;
+    }
+
+    void print(int tb = 0) const {
+        std::string s(tb, '\t');
+        std::cout << s << "(sz=" << childs_.size() << std::endl;
+        for (auto child : childs_) {
+            child->print(tb + 1);
         }
     }
 
-    std::size_t length() const {
-        return data_.size();
+    int count() const {
+        if (childs_.size() == 0) {
+            return 1;
+        } else {
+            int sum = 0;
+            for (auto child : childs_) {
+                sum += child->count();
+            }
+            return sum * 2;
+        }
     }
 
-    std::pair <char, level> operator [](int i) const {
-        return data_[i];
-    }
-};
-
-
-class Solution {
-public:
-    int scoreOfParentheses(std::string S) {
-        int i = 0;
-        LeveledString ls(S);
-        return count(ls, i);
-    }
-
-    int count(const LeveledString& s, int &i) {
+    int root_count() const {
         int sum = 0;
-        LeveledString::level this_level = s[i].second;
-        ++i;
-
-        while(i < s.length()) {
-            if (s[i - 1].first == '(') {
-                if (s[i].first == '(') {
-                    sum += count(s, i);
-                } else {
-                    sum += 1;
-                    ++i;
-                }
-            } else {
-                if (s[i].first == '(') {
-                    if (s[i].second < this_level) {
-                        return sum;
-                    } else {
-                        sum += count(s, i);
-                    }
-                } else {
-                    return 2 * sum;
-                }
-            }
+        for (auto child : childs_) {
+            sum += child->count();
         }
-
         return sum;
     }
 };
-*/
 
-void replace_all_occurencies(std::string &s, 
-                             const std::string &to_replace, 
-                             const std::string &replacement) {
-    std::size_t spos, replacement_size = to_replace.size();
-    while ((spos = s.find(to_replace)) != std::string::npos) {
-        s.replace(spos, replacement_size, replacement);
+void tn_from_string(const std::string &s, int &i, TreeNode *tn) {
+    while (i < s.length()) {
+        if (s[i] == '(') {
+            auto new_tn = tn->append();
+            ++i;
+            tn_from_string(s, i, new_tn);
+        } else {
+            ++i;
+            return;
+        }
     }
 }
 
-class CurrentSolution {
-    std::string s_;
-    std::vector <int> v_;
+class Solution {
 public:
-    CurrentSolution(const std::string &s): s_(s), v_(s.length()) {
-        
+    int scoreOfParentheses(std::string input) {
+        int i = 0;
+        auto root = new TreeNode();
+        tn_from_string(input, i, root);
+        //root->print();
+        return root->root_count();
     }
 };
-
-
 
 int main(int argc, char const *argv[])
 {
     std::string input;
     std::cin >> input;
-    replace_all_occurencies(input, "()", "s");
-    if (input.find('(') == std::string::npos) {
-        std::cout << std::count(input.begin(), input.end(), 's') << std::endl;
-    }
-    std::vector<int> v;
-    v.erase()
-    std::cout << input << std::endl;
+    Solution s;
+    std::cout << s.scoreOfParentheses(input) << std::endl;
+    
     return 0;
 }
