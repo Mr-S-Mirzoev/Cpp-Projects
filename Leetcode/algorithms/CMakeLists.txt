@@ -33,3 +33,14 @@ set(SOURCE_FILES
 
 # Create an executable from the source files
 add_executable(${TARGET_NAME} ${SOURCE_FILES})
+
+# Executable name
+set(TARGET_NAME simplify_path)
+
+# All the sources to be linked
+set(SOURCE_FILES 
+    ${THIS_DIR}/simplify_path.cpp
+)
+
+# Create an executable from the source files
+add_executable(${TARGET_NAME} ${SOURCE_FILES})
