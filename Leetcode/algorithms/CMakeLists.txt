@@ -1,5 +1,5 @@
 set(THIS_DIR ${DIR}/algorithms)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DIR}/bin/algorithms)
+set(BIN_ROOT ${DIR}/bin/algorithms)
 
 list(APPEND  
     EASY_LIST
@@ -41,6 +41,8 @@ message(STATUS "====Building Algorithms subproject====")
 foreach(i RANGE ${list_max_index})
     list(GET TASK_LIST ${i} CURRENT_LEVEL_LIST_NAME)
     list(GET LEVEL_LIST ${i} LEVEL_NAME)
+
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_ROOT}/${LEVEL_NAME})
 
     foreach(LETTER ${${CURRENT_LEVEL_LIST_NAME}})
         message(STATUS "Creating executable \"${LETTER}\" from level: \"${LEVEL_NAME}\"")
