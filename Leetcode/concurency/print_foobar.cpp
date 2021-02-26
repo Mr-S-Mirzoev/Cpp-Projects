@@ -27,10 +27,10 @@ public:
             std::unique_lock <std::mutex> lck(mtx);
             
             cv.wait(
-               lck,
+                lck,
                 [&]{
                     return flag == true;
-                 }
+                }
             );
         	// printFoo() outputs "foo". Do not change or remove this line.
         	printFoo();
@@ -48,10 +48,10 @@ public:
         	std::unique_lock <std::mutex> lck(mtx);
             
             cv.wait(
-               lck,
+                lck,
                 [&]{
                     return flag == false;
-                 }
+                }
             );
         	// printFoo() outputs "foo". Do not change or remove this line.
         	printBar();
@@ -84,7 +84,7 @@ int main(int argc, char const *argv[])
     
     for (int i = 0; i < 2 * n; ++i) {
         if (rand() % 2) {
-            if (foo_count >= 0) {
+            if (foo_count > 0) {
                 threads.push_back(std::thread(&Solution::foo, &s, foo));
                 --foo_count;
             } else {
@@ -92,7 +92,7 @@ int main(int argc, char const *argv[])
                 --bar_count;
             }
         } else {
-            if (bar_count >= 0) {
+            if (bar_count > 0) {
                 threads.push_back(std::thread(&Solution::bar, &s, bar));
                 --bar_count;
             } else {
