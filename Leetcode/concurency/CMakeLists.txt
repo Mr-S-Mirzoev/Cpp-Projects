@@ -4,19 +4,50 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DIR}/bin/concurency)
 # Find threads package to link with -pthread
 find_package( Threads )
 
-set(MYLIST  "print_in_order;print_foobar")
-foreach(LETTER ${MYLIST})
-    # Executable name
-    set(TARGET_NAME ${LETTER})
+list(APPEND  
+    EASY_LIST
+    "print_in_order"
+)
+list(APPEND
+    MEDIUM_LIST
+    "print_foobar"
+)
 
-    # All the sources to be linked
-    set(SOURCE_FILES 
-        ${THIS_DIR}/${TARGET_NAME}.cpp
-    )
+list(APPEND 
+     TASK_LIST  
+     "EASY_LIST" 
+     "MEDIUM_LIST"
+)
 
-    # Create an executable from the source files
-    add_executable(${TARGET_NAME} ${SOURCE_FILES})
+list(APPEND 
+     LEVEL_LIST 
+     "easy"
+     "medium"
+)
+list(LENGTH LEVEL_LIST level_count)
+math(EXPR list_max_index ${list_count}-1)
 
-    # Link with pthread
-    target_link_libraries(${TARGET_NAME} ${CMAKE_THREAD_LIBS_INIT})
+message(STATUS "====Building Concurency subproject====")
+
+foreach(i RANGE ${list_max_index})
+    list(GET TASK_LIST ${i} CURRENT_LEVEL_LIST_NAME)
+    list(GET LEVEL_LIST ${i} LEVEL_NAME)
+
+    foreach(LETTER ${${CURRENT_LEVEL_LIST_NAME}})
+        message(STATUS "Creating executable \"${LETTER}\" from level: \"${LEVEL_NAME}\"")
+
+        # Executable name
+        set(TARGET_NAME ${LETTER})
+
+        # All the sources to be linked
+        set(SOURCE_FILES 
+            ${THIS_DIR}/${LEVEL_NAME}/${TARGET_NAME}.cpp
+        )
+
+        # Create an executable from the source files
+        add_executable(${TARGET_NAME} ${SOURCE_FILES})
+
+        # Link with pthread
+        target_link_libraries(${TARGET_NAME} ${CMAKE_THREAD_LIBS_INIT})
+    endforeach()
 endforeach()
