@@ -11,6 +11,7 @@ list(APPEND
 list(APPEND
     MEDIUM_LIST
     "print_foobar"
+    "hydrogen"
 )
 
 list(APPEND 

@@ -3,7 +3,8 @@ set(BIN_ROOT ${DIR}/bin/algorithms)
 
 list(APPEND  
     EASY_LIST
-    "min_stack" 
+    "min_stack"
+    "candies" 
 )
 list(APPEND
     MEDIUM_LIST
