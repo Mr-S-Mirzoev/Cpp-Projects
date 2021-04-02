@@ -4,6 +4,3 @@
 [submodule "TechnoSphere"]
 	path = TechnoSphere
 	url = git@github.com:Mr-S-Mirzoev/TechnoSphere.git
-[submodule "Studies/Stochastic Gradient/dependencies/blaze"]
-	path = Studies/Stochastic Gradient/dependencies/blaze
-	url = https://github.com/dendisuhubdy/blaze.git
