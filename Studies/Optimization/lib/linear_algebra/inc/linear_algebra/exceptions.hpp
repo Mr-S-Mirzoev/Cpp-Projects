@@ -35,6 +35,19 @@ namespace linear_algebra
             LinearAlgebraException("Not a pair! " + s) {}
     }; // class NotAPairException
 
+    class NotSquareException: public LinearAlgebraException {
+    public:
+        NotSquareException(std::size_t n, std::size_t m):
+            LinearAlgebraException("Not a square matrix! Trying to apply square op to a " + 
+                                    std::to_string(n) + "x" + std::to_string(m) + " matrix." ) {}
+    }; // class NotSquareException
+
+    class ZeroDeterminantException: public LinearAlgebraException {
+    public:
+        ZeroDeterminantException():
+            LinearAlgebraException("The determinant of matrix is zero" ) {}
+    }; // class ZeroDeterminantException
+
     class IndexOutOfRangeException: public LinearAlgebraException {
     public:
         IndexOutOfRangeException(std::size_t i, std::size_t j, 
@@ -49,6 +62,12 @@ namespace linear_algebra
                                     std::to_string(i) + "] in a " + 
                                     std::to_string(n) + "-sized vector.") {}
     }; // class IndexOutOfRangeException
+
+    class IrrationalSpaceUsageException: public LinearAlgebraException {
+    public:
+        IrrationalSpaceUsageException():
+            LinearAlgebraException("The space is being used irrationally" ) {}
+    }; // class IrrationalSpaceUsageException
 
 } // namespace linear_algebra
 

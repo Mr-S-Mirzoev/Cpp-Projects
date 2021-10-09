@@ -39,20 +39,11 @@ namespace linear_algebra
             std::unique_ptr<Matrix> A1{new Matrix()}, A2{new Matrix()};
             split(A1.get(), A2.get(), _n / 2, true);
 
-            std::cout << "Case A:" << std::endl;
-            std::cout << *A1 << std::endl << std::endl;
-            std::cout << *A2 << std::endl << std::endl;
-
-
             *this = merge(A1->mul(rhs), A2->mul(rhs), true);
             return *this;
         } else if (_max == rhs._m) {
             std::unique_ptr<Matrix> B1{new Matrix()}, B2{new Matrix()};
             rhs.split(B1.get(), B2.get(), rhs._m / 2);
-
-            std::cout << "Case B:" << std::endl;
-            std::cout << *B1 << std::endl << std::endl;
-            std::cout << *B2 << std::endl << std::endl;
 
             Matrix cpy(*this);
             cpy.mul(*B1);
@@ -66,17 +57,93 @@ namespace linear_algebra
             std::unique_ptr<Matrix> B1{new Matrix()}, B2{new Matrix()};
             rhs.split(B1.get(), B2.get(), rhs._n / 2, true);
 
-            std::cout << "Case C:" << std::endl;
-            std::cout << *this << std::endl << std::endl;
-            std::cout << rhs << std::endl << std::endl;
-            std::cout << *A1 << std::endl << std::endl;
-            std::cout << *A2 << std::endl << std::endl;
-            std::cout << *B1 << std::endl << std::endl;
-            std::cout << *B2 << std::endl << std::endl;
-
             *this = A1->mul(*B1) + A2->mul(*B2);
             return *this;
         }
+    }
+
+    bool Matrix::operator==(const Matrix &rhs) const {
+        if (rhs._m != _m || rhs._n != _n)
+            return false;
+        
+        auto it = _data.begin();
+        auto rit = rhs._data.begin();
+
+        for (; it != _data.end() && rit != rhs._data.end(); ++it, ++rit)
+            if (std::abs(*it - *rit) > EPS)
+                return false;
+
+        return true;
+    }
+
+    Matrix& Matrix::inverse() {
+        if (_n != _m)
+            throw NotSquareException(_n, _m);
+        
+        Matrix aug = merge(*this, eye(_n));
+
+        /* Applying Gauss Jordan Elimination */
+        for (std::size_t i = 0; i < _n; ++i) {
+            if (std::abs(aug[{i, i}]) < 1e-5)
+                throw ZeroDeterminantException();
+            
+            for (std::size_t j = 0; j < _n; ++j) {
+                if (i != j) {
+                    double ratio = aug[{j, i}] / aug[{i, i}];
+                    for (std::size_t k = 0; k < 2 * _n; ++k)
+                        aug[{j, k}] -= ratio * aug[{i, k}];
+                }
+            }
+        }
+
+        /* Row Operation to Make Principal Diagonal to 1 */
+        for (std::size_t i = 0; i < _n; ++i)
+            for (std::size_t j = _n; j < 2 * _n; ++j)
+                aug[{i, j}] /= aug[{i, i}];
+
+        std::unique_ptr<Matrix> Eye{new Matrix()}, Inv{new Matrix()};
+        aug.split(Eye.get(), Inv.get(), _n);
+
+        *this = Matrix(*Inv);
+        return *this;
+    }
+
+    Matrix& Matrix::pow(int pow) {
+        if (pow == 0) {
+            *this = Matrix(_n, 1.);
+            return *this;
+        }
+
+        if (_n != _m)
+            throw NotSquareException(_n, _m);
+
+        if (pow < 0) {
+            inverse();
+            pow = -pow;
+        }
+
+        Matrix result = eye(_n);
+
+        while (pow > 1) {
+            if (pow % 2 == 0) {
+                mul(*this);
+                pow = pow / 2;
+            } else {
+                result.mul(*this);
+                mul(*this);
+                pow = (pow - 1) / 2;
+            }
+        }
+
+        result.mul(*this);
+        *this = result;
+        return *this;
+    }
+
+    Matrix Matrix::operator^(int pow) {
+        Matrix cpy(*this);
+        cpy.pow(pow);
+        return cpy;
     }
 
     Matrix Matrix::operator*(const Matrix &rhs) {
@@ -163,7 +230,6 @@ namespace linear_algebra
     ELEMENT_WISE_OPERATION_IMPL(dot,*=);
 
     void Matrix::split(Matrix *a, Matrix *b, std::size_t idx, bool horizontal) const {
-        //std::cout << idx << ' ' << horizontal << ' ' << _n << ' ' << _m << std::endl;
 
         if (horizontal) {
             Matrix _a(idx, _m), _b(_n - idx, _m);
@@ -233,4 +299,16 @@ namespace linear_algebra
             return c;
         }
     }
+
+    Matrix eye(std::size_t n, double val) {
+        Matrix proto(n, n);
+        for (std::size_t i = 0; i < n; ++i) {
+            for (std::size_t j = 0; j < n; ++j) {
+                proto[{i, j}] = (i == j) ? val : .0;
+            }
+        }
+
+        return proto;
+    }
+
 } // namespace linear_algebra

@@ -24,3 +24,17 @@ set(SOURCE_FILES
 
 add_library(${LIB_NAME} SHARED ${SOURCE_FILES})
 target_include_directories(${LIB_NAME} PUBLIC ${INC_DIR})
+
+# Library tests
+set(TEST_DIR ${DIR}/test)
+enable_testing()
+find_package(GTest REQUIRED)
+
+set(TEST_TARGET_NAME ${LIB_NAME}tests)
+set(TEST_SOURCE_FILES
+    ${TEST_DIR}/power_unittest.cc
+    ${TEST_DIR}/util_unittest.cc
+)
+add_executable(${TEST_TARGET_NAME} ${TEST_SOURCE_FILES})
+target_include_directories(${TEST_TARGET_NAME} PRIVATE ${INC_DIR})
+target_link_libraries(${TEST_TARGET_NAME} GTest::GTest GTest::Main ${LIB_NAME})
