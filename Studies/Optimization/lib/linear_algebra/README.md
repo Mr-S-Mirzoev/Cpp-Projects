@@ -10,21 +10,44 @@ Vector v supports m[i] indexing
 double& operator[](Index idx);
 double  operator[](Index idx) const;
 `
-Matrix& operator=(Matrix &&rhs);
-Matrix& operator=(const Matrix &rhs);
-bool operator==(const Matrix &rhs) const;
 
-#define ELEMENT_WISE_OPERATION_DEF(NAME) Matrix& NAME(const Matrix &rhs)
-ELEMENT_WISE_OPERATION_DEF(operator+);
-ELEMENT_WISE_OPERATION_DEF(operator-);
-ELEMENT_WISE_OPERATION_DEF(dot);
+## Arithmetical operations
 
-Matrix operator*(const Matrix &rhs);
+Element-wise:
+`
+Matrix a, b;
+a.dot(b), a + b, a - b
+`
+
+Multiplexing:
+`
+Matrix a, b;
+a * b
+`
+
+Power:
+`
+Matrix a;
+a ^ (3), a ^ (-4), a ^ (0)
+`
 Matrix operator^(int pow);
-/**
-    * A = this[:idx] (so it has to be > 0)
-    * B = this[idx:]
-    */
-void split(Matrix *a, Matrix *b, std::size_t idx, bool horizontal = false) const;
 
-friend std::ostream& operator<<(std::ostream& os, const Matrix& m);
+## Block matrix tools
+
+To split matrix into [A1 A2] or [ B1 / B2] (horizontaly)
+`
+void split(Matrix *a, Matrix *b, std::size_t idx, bool horizontal = false) const;
+`
+
+Merge matrix accordingly:
+`
+Matrix merge(const Matrix &a, const Matrix &b, bool horizontal = false);
+`
+
+## Print matrix
+
+ostream support:
+`
+Matrix a = eye(4);
+std::cout << a << std::endl;
+`
