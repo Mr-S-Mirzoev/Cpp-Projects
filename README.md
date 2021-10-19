@@ -14,8 +14,8 @@
 
 Here I collect the tasks from the past interviews.
 
-- Command (2020 Q1-Q2 / [AVSoft](https://www.avsw.ru/en)): Command (with redo/undo) used to update XML structure of company
-- Readers&Writers Problem (2020 Q1-Q2 / [AVSoft](https://www.avsw.ru/en)): Classical synchronization problem solution
+- Command (2020 Q1-Q2 / [AVSoft](https://en.avsw.ru/)): Command (with redo/undo) used to update XML structure of company
+- Readers&Writers Problem (2020 Q1-Q2 / [AVSoft](https://en.avsw.ru/)): Classical synchronization problem solution
 - Multithreading in Matrix Multiplication (2020 Q1-Q2 / [1C](https://www.1c.com/))
 - Beautiful Numbers (2020 Q1-Q2 / [Delta Solutions](https://www.deltasolutions.ru/en)): Quantity of "beautiful" 13-digit numbers in 13-digit system
 - Huobi-Analyzer (2020 Q3-Q4 / [L3 Tech](https://l3tech.io/en/)): Analyser for Huobi option with Google benchmark tests
