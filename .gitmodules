@@ -1,6 +1,3 @@
-[submodule "Huobi-Analyzer"]
-	path = Huobi-Analyzer
-	url = git@github.com:Mr-S-Mirzoev/Huobi-Analyzer.git
-[submodule "TechnoSphere"]
-	path = TechnoSphere
+[submodule "VK.Education"]
+	path = VK.Education
 	url = git@github.com:Mr-S-Mirzoev/TechnoSphere.git
