@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<departments>
+   <department name="Design">
+      <employments>
+         <employment>
+            <surname>Dowson</surname>
+            <name>John</name>
+            <middleName>Michael</middleName>
+            <position>Head of department</position>
+            <salary>100000</salary>
+         </employment>
+         <employment>
+            <surname>Smith</surname>
+            <name>Peter</name>
+            <middleName>James</middleName>
+            <position>Deputy Manager of Department</position>
+            <salary>80000</salary>
+         </employment>
+         <employment>
+            <surname>Aduk</surname>
+            <name>Igor</name>
+            <middleName>Borisovich</middleName>
+            <position>WEB designer</position>
+            <salary>50000</salary>
+         </employment>
+         <employment>
+            <surname>Aksenov</surname>
+            <name>Alexey</name>
+            <middleName>Gennadievich</middleName>
+            <position>Artist</position>
+            <salary>50000</salary>
+         </employment>
+         <employment>
+            <surname>Aksenov</surname>
+            <name>Dmitry</name>
+            <middleName>Viktorovich</middleName>
+            <position>Interface Designer</position>
+            <salary>45000</salary>
+         </employment>
+      </employments>
+   </department>
+   <department name="WEB development" >
+      <employments>
+         <employment>
+            <surname>Bazarov</surname>
+            <name>Andrey</name>
+            <middleName>Viktorovich</middleName>
+			   <position>Head of Department</position>
+            <salary>90000</salary>
+         </employment>
+         <employment>
+            <surname>Balikhina</surname>
+            <name>Olga</name>
+            <middleName>Viacheslavovna</middleName>
+			   <position>Deputy Head of Department</position>
+            <salary>70000</salary>
+         </employment>
+         <employment>
+            <surname>Bashmakova</surname>
+            <name>Elena</name>
+            <middleName>Sergeevna</middleName>
+			   <position>HTML Layout Editor</position>
+            <salary>40000</salary>
+         </employment>
+         <employment>
+            <surname>Vdovin</surname>
+            <name>Vitaly</name>
+            <middleName>Yurievich</middleName>
+			   <position>Javascript Programmer</position>
+            <salary>50000</salary>
+         </employment>
+         <employment>
+            <surname>Vdovina</surname>
+            <name>Evgeniya</name>
+            <middleName>Fyodorovna</middleName>
+			   <position>CSS Layout Editor</position>
+            <salary>40000</salary>
+         </employment>
+         <employment>
+            <surname>Grigoriev</surname>
+            <name>Pavel</name>
+            <middleName>Vladimirovich</middleName>
+			   <position>DB Programmer</position>
+            <salary>60000</salary>
+         </employment>
+         <employment>
+            <surname>Danilov</surname>
+            <name>Nikolai</name>
+            <middleName>Valentinovich</middleName>
+			   <position>Site Administrator</position>
+            <salary>83</salary>
+         </employment>
+      </employments>
+   </department>
+   <department name= "System Programming" >
+      <employments>
+         <employment>
+            <surname>Vasiliev</surname>
+            <name>Maxim</name>
+            <middleName>Viktorovich</middleName>
+			   <position>Head of Department</position>
+            <salary>100000</salary>
+         </employment>
+         <employment>
+            <surname>Velichko</surname>
+            <name>Olga</name>
+            <middleName>Valerievna</middleName>
+			   <position>Deputy Head of Department</position>
+            <salary>80000</salary>
+         </employment>
+         <employment>
+            <surname>Gavrilov</surname>
+            <name>Roman</name>
+            <middleName>Nikolayevich</middleName>
+			   <position>Windows System Programmer</position>
+            <salary>50000</salary>
+         </employment>
+         <employment>
+            <surname>Debts</surname>
+            <name>Nikolai</name>
+            <middleName>Alekseyevich</middleName>
+			   <position>Windows System Programmer</position>
+            <salary>50000</salary>
+         </employment>
+         <employment>
+            <surname>Dukov</surname>
+            <name>Vladimir</name>
+            <middleName>Evgenievich</middleName>
+			   <position>Linux System Programmer</position>
+            <salary>50000</salary>
+         </employment>
+         <employment>
+            <surname>Emelyanov</surname>
+            <name>Dmitry</name>
+            <middleName>Yurievich</middleName>
+			   <position>Linux System Programmer</position>
+            <salary>50000</salary>
+         </employment>
+      </employments>
+   </department>
+</departments>
