@@ -9,6 +9,7 @@
 
 
 <a name="interviews"/>
+
 ### Interviews
 
 Here I collect the tasks from the past interviews.
@@ -20,6 +21,7 @@ Here I collect the tasks from the past interviews.
 - Huobi-Analyzer (2020 Q3-Q4 / [L3 Tech](https://l3tech.io/en/)): Analyser for Huobi option with Google benchmark tests
 
 <a name="studies"/>
+
 ### Studies
 
 Here I collect tasks from studies at the Computer Science faculty of MSU
