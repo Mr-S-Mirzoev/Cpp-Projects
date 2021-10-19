@@ -2,10 +2,10 @@
 
 ## Repository structure
 
-[Interviews](#interviews)  
-[Leetcode](./Leetcode/)
-[Studies](#studies)
-[VK.Education](./VK.Education)
+- [Interviews](#interviews)  
+- [Leetcode](./Leetcode/)
+- [Studies](#studies)
+- [VK.Education](https://github.com/Mr-S-Mirzoev/VK.Education)
 
 
 <a name="interviews"/>
