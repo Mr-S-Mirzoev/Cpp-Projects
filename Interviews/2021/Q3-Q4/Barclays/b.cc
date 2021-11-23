@@ -82,5 +82,5 @@ int main()
 
     std::cout << max << std::endl;
 
-	return 0;
+    return 0;
 }
