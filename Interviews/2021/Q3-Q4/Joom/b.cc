@@ -1,37 +1,6 @@
 #include <iostream>
 #include <stack>
 
-/*
-Tree example:
-    1
-  2   3
- * 5 6 7
-*/
-
-/*
-IDEA:
-
-def inorderTraversal(self, root):
-    result=[]
-    node=root
-    while node!=None:
-        if node.left==None:
-            result.append(node.val)
-            node=node.right
-        else:
-            pre=node.left
-            while pre.right!=None and pre.right!=node:
-                pre=pre.right
-            if pre.right==None:
-                pre.right=node
-                node=node.left
-            else:
-                pre.right=None
-                result.append(node.val)
-                node=node.right
-    return result
-*/
-
 template <typename T>
 class TreeNode {
     T value_;
@@ -40,6 +9,34 @@ class TreeNode {
 public:
     TreeNode(T const& value): value_(value) {}
 
+    /*
+    Tree example:
+        1
+      2   3
+     * 5 6 7
+    
+    IDEA (Morris traversal):
+
+    def inorderTraversal(self, root):
+        result=[]
+        node=root
+        while node!=None:
+            if node.left==None:
+                result.append(node.val)
+                node=node.right
+            else:
+                pre=node.left
+                while pre.right!=None and pre.right!=node:
+                    pre=pre.right
+                if pre.right==None:
+                    pre.right=node
+                    node=node.left
+                else:
+                    pre.right=None
+                    result.append(node.val)
+                    node=node.right
+        return result
+    */
     static void traverse(TreeNode *root) {
         TreeNode *node = root;
         TreeNode *prev;
