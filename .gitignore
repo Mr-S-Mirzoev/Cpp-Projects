@@ -1,0 +1,5 @@
+.vscode/settings.json
+build/
+input.txt
+output.txt
+sorted.txt
