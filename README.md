@@ -14,3 +14,10 @@ make -C build -j2
 ```
 ./test.sh ./build/external_sort
 ```
+
+## RAM Usage check
+
+```
+valgrind --tool=massif  ./build/external_sort
+ms_print ms_print massif.out.*
+```

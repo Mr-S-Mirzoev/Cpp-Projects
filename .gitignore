@@ -3,3 +3,4 @@ build/
 input.txt
 output.txt
 sorted.txt
+massif.out*
