@@ -32,4 +32,3 @@
     1)  Pad with x = 7 [ 2 ]
     2) Pad with x = 11 [ 4 ]
     3) Pad with x = 14 [ 2 ]
-    
