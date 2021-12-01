@@ -63,13 +63,13 @@ unsigned minimal_assignment_time(std::vector <unsigned> const& helis, std::vecto
     );
 
     unsigned l = min, r = max;
-    while (l <= r) {
+    while (l < r) {
         unsigned m = (l + r) >> 1;
         bool possible = is_it_possible(helis, pads_tree, m);
         if (!possible) {
             l = m + 1;
         } else {
-            r = m - 1;
+            r = m;
         }
     }
     return l;
