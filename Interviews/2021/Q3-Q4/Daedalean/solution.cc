@@ -77,10 +77,18 @@ unsigned minimal_assignment_time(std::vector <unsigned> const& helis, std::vecto
 
 int main(int argc, char const *argv[])
 {
-    // Helis: {2, 5, 7, 12}
-    std::vector <unsigned> helis{2, 5, 7, 12};
-    // Pads:  {0, 7, 11, 14, 16}
-    std::vector <unsigned> pads{0, 7, 11, 14, 16};
+    unsigned H, L;
+    std::cin >> H >> L;
+    // For example: {2, 5, 7, 12}
+    std::vector <unsigned> helis(H);
+    // For example: {0, 7, 11, 14, 16}
+    std::vector <unsigned> pads(L);
+
+    for (unsigned i = 0; i < H; ++i)
+        std::cin >> helis[i];
+
+    for (unsigned i = 0; i < L; ++i)
+        std::cin >> pads[i];
 
     std::cout << minimal_assignment_time(helis, pads) << std::endl;
     return 0;
