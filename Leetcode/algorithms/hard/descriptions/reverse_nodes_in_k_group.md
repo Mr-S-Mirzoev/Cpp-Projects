@@ -38,7 +38,7 @@ You may not alter the values in the list's nodes, only nodes themselves may be c
 The number of nodes in the list is in the range sz. 
 
 ```math
-1 \le sz \le 5000
-0 \le Node.val \le 1000
-1 \le k \le sz
+1 <= sz <= 5000
+0 <= Node.val <= 1000
+1 <= k <= sz
 ```
