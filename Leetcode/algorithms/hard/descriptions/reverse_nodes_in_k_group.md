@@ -35,4 +35,10 @@ You may not alter the values in the list's nodes, only nodes themselves may be c
 
 ## Constraints:
 
-The number of nodes in the list is in the range sz. $1 \le sz \le 5000$ . $0 \le Node.val \le 1000$ . $1 \le k \le sz$ .
+The number of nodes in the list is in the range sz. 
+
+```math
+1 \le sz \le 5000
+0 \le Node.val \le 1000
+1 \le k \le sz
+```
