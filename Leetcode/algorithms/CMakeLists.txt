@@ -19,6 +19,7 @@ list(APPEND
     "median_of_two_vectors" 
     "merge_sorted_lists" 
     "regular_expression_matching" 
+    "reverse_nodes_in_k_group"
 )
 
 list(APPEND 
