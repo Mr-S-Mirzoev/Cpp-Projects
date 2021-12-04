@@ -20,6 +20,7 @@ list(APPEND
     "merge_sorted_lists" 
     "regular_expression_matching" 
     "reverse_nodes_in_k_group"
+    "substring_with_concatenation"
 )
 
 list(APPEND 
