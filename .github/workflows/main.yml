@@ -6,9 +6,9 @@ name: External-Sort-CI
 # If you want to run it manually you would add "worflow_dispatch"
 on:
   push:
-    branches: [ docker_support ]
+    branches: [ main ]
   pull_request:
-    branches: [ docker_support ]
+    branches: [ main ]
   workflow_dispatch:
 
 # The whole action can contain sub-items called jobs
