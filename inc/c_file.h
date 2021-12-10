@@ -2,6 +2,7 @@
 #define C_FILE_H
 
 #include <cstdio>
+#include <stdexcept>
 #include <string>
 
 class C_File {
@@ -29,7 +30,7 @@ public:
         fp(fopen(filename.c_str(), mode.c_str())), mode(mode == "w"), tmp(tmp), filename(filename) 
     {
         if (fp == NULL)
-            exit(EXIT_FAILURE);
+            throw std::logic_error("Failed to open: " + filename);
     }
 
     C_File& operator=(C_File &&oth);
