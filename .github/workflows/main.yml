@@ -6,9 +6,9 @@ name: External-Sort-CI
 # If you want to run it manually you would add "worflow_dispatch"
 on:
   push:
-    branches: [ main ]
+    branches: [ docker_support ]
   pull_request:
-    branches: [ main ]
+    branches: [ docker_support ]
   workflow_dispatch:
 
 # The whole action can contain sub-items called jobs
@@ -32,6 +32,7 @@ jobs:
       # Builds docker image and runs test
       - name: Test external sort
         run: |
+          chmod +x test.sh
           docker build -t extsort .
           docker run --name ubuntu_extsort --rm -d -t extsort bash
           docker exec ubuntu_extsort ./test.sh -e ./build/external_sort -d /tmp/output_dir
