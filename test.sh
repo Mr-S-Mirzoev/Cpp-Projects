@@ -1,15 +1,44 @@
-#!/bin/bash
+#!/bin/bash -e
 
-if [ "$#" -ne 1 ]; then
-    echo "Pass the path to executable as an argument"
-    exit 1
+QUANTITY=25000
+LINE_Q=10000
+
+while getopts q:d:l:e:h option
+do
+    case "${option}"
+    in
+        q) QUANTITY=${OPTARG};;
+        d) DIR=${OPTARG};;
+        l) LINE_Q=${OPTARG};;
+        e) EXECUTABLE=${OPTARG};;
+        h) SHOW_HELP=1;;
+    esac
+done
+
+HELP_EXIT_STATUS=0
+if [[ "$DIR" == "" || "$EXECUTABLE" == "" ]]; then
+    SHOW_HELP="1"
+    HELP_EXIT_STATUS=1
 fi
 
+if [[ "$SHOW_HELP" == "1" ]]; then
+    echo "Usage ./test.sh [ARGS]"
+    printf "\t-h\t\t\tshow help\n"
+    printf "\t-e\t[MANDATORY]\texecutable which implements external sorting\n"
+    printf "\t-d\t[MANDATORY]\ttest directory path\n"
+    printf "\t-q\t[OPTIONAL]\tquantity of lines in generated file\n"
+    printf "\t-l\t[OPTIONAL]\tmax length\n"
+    exit ${HELP_EXIT_STATUS}
+fi
+
+DIR=$(echo ${DIR} | sed 's:/*$::')
+export TEST_DIR=${DIR}
+
 mkdir -p ${TEST_DIR}
-python3 generate_file.py -o ${TEST_DIR}/input.txt -l 10000 -q 25000
+python3 generate_file.py -o ${TEST_DIR}/input.txt -q "$QUANTITY" -l "$LINE_Q"
+echo "Sorting $(du -sh ./output_dir/input.txt)"
 sort ${TEST_DIR}/input.txt --output=${TEST_DIR}/sorted.txt --parallel=10
-$1
-mv output.txt ${TEST_DIR}
+${EXECUTABLE}
 
 SHA_CORRECT=$(sha256sum ${TEST_DIR}/output.txt --tag | awk '{print $4}')
 SHA_PROG=$(sha256sum ${TEST_DIR}/sorted.txt --tag | awk '{print $4}')
@@ -24,4 +53,3 @@ else
     printf "Real SHA256:\t\t$SHA_PROG\n"
     exit 1
 fi
-

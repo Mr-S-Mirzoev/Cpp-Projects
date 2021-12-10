@@ -1,0 +1,51 @@
+name: External-Sort-CI
+
+# The "on" option will specify when to run this action and on which branch
+# Usually for a CI action you would like to run it on every pull request and on push
+# For CD you would probably only want to run it on closed pull requests or direct pushes on master
+# If you want to run it manually you would add "worflow_dispatch"
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+# The whole action can contain sub-items called jobs
+# Jobs are run separately and will spin up a new build machine for each sub-item
+jobs:
+  # Under jobs you can put whatever name you want
+
+  # This is just a custom name "build" but it can be anything
+  build:
+    # What build machine to start
+
+    # For Windows you can go with "windows-latest"
+    runs-on: ubuntu-latest
+
+    # Steps are the individual actions for each job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Usually this is always needed
+      - uses: actions/checkout@v2
+
+      # Builds docker image and runs test
+      - name: Test external sort
+        run: |
+          docker build -t extsort .
+          docker run --name ubuntu_extsort --rm -d -t extsort bash
+          docker exec ubuntu_extsort ./test.sh -e ./build/external_sort -d /tmp/output_dir
+          docker cp ubuntu_extsort:/tmp/output_dir /tmp
+          exit $?
+
+      - name: Upload generated file
+        uses: actions/upload-artifact@v2
+        with:
+          name: generated_input_file
+          path: /tmp/output_dir/input.txt
+
+      - name: Upload sorted generated file
+        uses: actions/upload-artifact@v2
+        with:
+          name: sorted
+          path: /tmp/output_dir/output.txt

@@ -142,7 +142,7 @@ void merge_runs(int start, int end, int location) {
     }
 }
 
-void merge_all_runs(int runs_count, std::string output_name) {
+int merge_all_runs(int runs_count, std::string output_name) {
     int start = 1;
     int end = runs_count;
 
@@ -177,7 +177,9 @@ void merge_all_runs(int runs_count, std::string output_name) {
 
     std::stringstream ss;
     ss << "run_" << start << ".txt";
-    rename(ss.str().c_str(), output_name.c_str());
+
+    std::rename(ss.str().c_str(), output_name.c_str());
+    int ret_val = errno;
 
     // Clean up the directory
     for (int i = 1; i < end; i++) {
@@ -185,4 +187,6 @@ void merge_all_runs(int runs_count, std::string output_name) {
         ss << "run_" << i << ".txt";
         remove(ss.str().c_str());
     }
+
+    return ret_val;
 }
