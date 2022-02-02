@@ -1,3 +1,5 @@
+#include <iostream>
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -77,3 +79,11 @@ public:
         return !notPalindrome;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    ListNode *head = new ListNode(0, new ListNode(1, new ListNode(0)));
+    Solution s;
+    std::cout << s.isPalindrome(head) << std::endl;
+    return 0;
+}

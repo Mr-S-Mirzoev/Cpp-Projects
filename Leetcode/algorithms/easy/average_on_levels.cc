@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 
 struct TreeNode {
     int val;
@@ -45,3 +46,18 @@ public:
         return averages;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    TreeNode *root = new TreeNode(2);
+    root->left = new TreeNode(4);
+    root->right = new TreeNode(15);
+    root->left->left = new TreeNode(-3);
+    root->left->right = new TreeNode(11);
+    root->right->left = new TreeNode(-34);
+    Solution s;
+    auto res = s.averageOfLevels(root);
+    for (int i = 0; i < res.size(); ++i)
+        std::cout << i << ": " << res[i] << std::endl;
+    return 0;
+}

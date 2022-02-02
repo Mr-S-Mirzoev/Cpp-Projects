@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <iostream>
 
 #define THROW_EXCEPTION_IN_ASSIGNMENT []() {std::__throw_runtime_error("Unknown ruleKey"); return -1;} ()
 
@@ -19,3 +20,12 @@ public:
         return count;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    std::vector<std::vector<std::string>> items = {{"phone","blue","pixel"},{"computer","silver","lenovo"},{"phone","gold","iphone"}};
+    std::string ruleKey = "color", ruleValue = "silver";
+    Solution s;
+    std::cout << s.countMatches(items, ruleKey, ruleValue) << std::endl;
+    return 0;
+}

@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include <string>
 
 std::vector<int> sayVec(std::vector<int> const& v) {
