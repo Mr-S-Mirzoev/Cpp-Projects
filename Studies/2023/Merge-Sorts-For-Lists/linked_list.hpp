@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <initializer_list>
+#include <memory>
 #include <ostream>
 
 typedef uint32_t u32;
@@ -20,25 +21,31 @@ private:
     struct Node
     {
         DataType value;
-        Node *next;
+        using UPtr = std::unique_ptr<Node>;
+        UPtr next;
 
-        Node(const DataType& value, Node *next = nullptr);
-        Node(DataType&& value, Node *next = nullptr);
+        Node(const DataType& value, UPtr next = nullptr);
+        Node(DataType&& value, UPtr next = nullptr);
     };
 
-    Node *head = nullptr;
-    Node **tail = &head;
+    typename Node::UPtr head = nullptr;
+    typename Node::UPtr* tail = &head;
 
 public:
     LinkedList() = default;
+    LinkedList(const LinkedList<DataType>& other);
+    LinkedList(LinkedList<DataType>&& other);
     LinkedList(const std::initializer_list<DataType>& elements);
     LinkedList(std::initializer_list<DataType>&& elements);
     ~LinkedList();
 
+    LinkedList<DataType>& operator=(const LinkedList<DataType>& other);
+    LinkedList<DataType>& operator=(LinkedList<DataType>&& other);
+
     class Iterator
     {
     private:
-        Node *ptr;
+        Node* ptr;
     public:
 
         using iterator_category = std::forward_iterator_tag;
@@ -47,7 +54,7 @@ public:
         using pointer           = Node*;  // or also value_type*
         using reference         = DataType&;  // or also value_type&
 
-        Iterator(Node *ptr);
+        Iterator(Node* ptr);
 
         Iterator& operator++(int);
         Iterator& operator++();
@@ -64,6 +71,12 @@ public:
 
     void pop_back();
     void pop_front();
+
+    DataType& front();
+    DataType& back();
+
+    DataType front() const;
+    DataType back() const;
 
     template <Iterable IterableType>
     bool operator==(const IterableType& other) const;

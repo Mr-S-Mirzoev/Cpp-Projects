@@ -1,18 +1,19 @@
 #include "linked_list.hpp"
 
-#include <iostream>
+#include "printable.hpp"
+
 #include <ranges>
 #include <utility>
 
 template <typename DataType>
-LinkedList<DataType>::Node::Node(const DataType& value, Node *next)
-    : value(value), next(next)
+LinkedList<DataType>::Node::Node(const DataType& value, Node::UPtr next)
+    : value(value), next(std::move(next))
 {
 }
 
 template <typename DataType>
-LinkedList<DataType>::Node::Node(DataType&& value, Node *next)
-    : value(std::move(value)), next(next)
+LinkedList<DataType>::Node::Node(DataType&& value, Node::UPtr next)
+    : value(std::move(value)), next(std::move(next))
 {
 }
 
@@ -25,14 +26,14 @@ LinkedList<DataType>::Iterator::Iterator(Node *ptr)
 template <typename DataType>
 inline typename LinkedList<DataType>::Iterator& LinkedList<DataType>::Iterator::operator++(int)
 {
-    ptr = ptr->next;
+    ptr = ptr->next.get();
     return *this;
 }
 
 template <typename DataType>
 inline typename LinkedList<DataType>::Iterator& LinkedList<DataType>::Iterator::operator++()
 {
-    ptr = ptr->next;
+    ptr = ptr->next.get();
     return *this;
 }
 
@@ -55,7 +56,21 @@ inline bool LinkedList<DataType>::Iterator::operator==(const Iterator &other) co
 }
 
 template <typename DataType>
-LinkedList<DataType>::LinkedList(const std::initializer_list <DataType>& elements)
+inline LinkedList<DataType>::LinkedList(const LinkedList<DataType> &other)
+{
+    for (auto it = other.cbegin(); it != other.cend(); ++it)
+        push_back(*it);
+}
+
+template <typename DataType>
+inline LinkedList<DataType>::LinkedList(LinkedList<DataType> &&other)
+{
+    tail = (other.head) ? other.tail : &head;
+    head = std::move(other.head);
+}
+
+template <typename DataType>
+LinkedList<DataType>::LinkedList(const std::initializer_list<DataType> &elements)
 {
     for (const auto &el : elements)
         push_back(el);
@@ -71,33 +86,46 @@ LinkedList<DataType>::LinkedList(std::initializer_list <DataType>&& elements)
 template <typename DataType>
 LinkedList<DataType>::~LinkedList()
 {
-    Node *next;
     while (head)
-    {
-        next = head->next;
-        delete head;
-        head = next;
-    }
+        head = std::move(head->next);
+}
+
+template <typename DataType>
+inline LinkedList<DataType>& LinkedList<DataType>::operator=(const LinkedList<DataType> &other)
+{
+    for (const auto &el : other)
+        push_back(el);
+
+    return *this;
+}
+
+template <typename DataType>
+inline LinkedList<DataType>& LinkedList<DataType>::operator=(LinkedList<DataType> &&other)
+{
+    tail = (other.head) ? other.tail : &head;
+    head = std::move(other.head);
+
+    return *this;
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::push_back(const DataType& element)
 {
-    *tail = new Node(element);
+    *tail = std::make_unique<Node>(element);
     tail = &((*tail)->next);
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::emplace_back(const DataType&& element)
 {
-    *tail = new Node(std::move(element));
-    tail = &((*tail)->next);
+    *tail = std::make_unique<Node>(std::move(element));
+    tail = &((tail->get())->next);
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::push_front(const DataType& element)
 {
-    head = new Node(element, head);
+    head = std::make_unique<Node>(element, std::move(head));
 
     // `tail` should always point to nullptr value inside.
     // other situation happens only when we push_front on an empty node
@@ -108,7 +136,7 @@ inline void LinkedList<DataType>::push_front(const DataType& element)
 template <typename DataType>
 inline void LinkedList<DataType>::emplace_front(const DataType&& element)
 {
-    head = new Node(std::move(element), head);
+    head = Node::UPtr(new Node{std::move(element), std::move(head)});
 
     // `tail` should always point to nullptr value inside.
     // other situation happens only when we push_front on an empty node
@@ -121,12 +149,11 @@ inline void LinkedList<DataType>::pop_back()
 {
     if (!head) return;
 
-    Node **last_node = &head;
+    typename Node::UPtr *last_node = &head;
 
     while ((*last_node)->next)
         last_node = &(*last_node)->next;
 
-    delete (*last_node);
     *last_node = nullptr;
 }
 
@@ -135,16 +162,47 @@ inline void LinkedList<DataType>::pop_front()
 {
     if (!head) return;
 
-    Node *last_head = head;
-    head = head->next;
+    head = std::move(head->next);
+}
 
-    delete last_head;
+template <typename DataType>
+inline DataType &LinkedList<DataType>::front()
+{
+    return head.get()->value;
+}
+
+template <typename DataType>
+inline DataType &LinkedList<DataType>::back()
+{
+    typename Node::UPtr *last_node = &head;
+
+    while ((*last_node)->next)
+        last_node = &(*last_node)->next;
+
+    return (*last_node).get()->value;
+}
+
+template <typename DataType>
+inline DataType LinkedList<DataType>::front() const
+{
+    return head.get()->value;
+}
+
+template <typename DataType>
+inline DataType LinkedList<DataType>::back() const
+{
+    auto *last_node = const_cast<typename Node::UPtr *>(&head);
+
+    while ((*last_node)->next)
+        last_node = &(*last_node)->next;
+
+    return (*last_node).get()->value;
 }
 
 template <typename DataType>
 inline typename LinkedList<DataType>::Iterator LinkedList<DataType>::begin()
 {
-    return Iterator(head);
+    return Iterator(head.get());
 }
 
 template <typename DataType>
@@ -156,7 +214,7 @@ inline typename LinkedList<DataType>::Iterator LinkedList<DataType>::end()
 template <typename DataType>
 inline typename LinkedList<DataType>::Iterator LinkedList<DataType>::cbegin() const
 {
-    return Iterator(head);
+    return Iterator(head.get());
 }
 
 template <typename DataType>
@@ -169,15 +227,9 @@ template <typename DataType>
 inline u32 LinkedList<DataType>::length() const
 {
     u32 len = 0;
-    for (Node *curr = head; curr; curr = curr->next, ++len);
+    for (Node *curr = head.get(); curr; curr = curr->next.get(), ++len);
     return len;
 }
-
-template<typename T>
-concept Printable = requires(T t) {
-    { std::cout << t } -> std::same_as<std::ostream&>;
-};
-static_assert(Printable<int>);
 
 template <Printable T>
 inline std::ostream &operator<<(std::ostream &os, LinkedList<T> &ll)
