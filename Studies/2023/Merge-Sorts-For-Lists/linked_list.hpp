@@ -11,6 +11,7 @@ template<typename T>
 concept Iterable = requires(T t) {
     t.begin();
     t.end();
+    t.size();
     t.begin()++;
 };
 
@@ -30,6 +31,13 @@ private:
 
     typename Node::UPtr head = nullptr;
     typename Node::UPtr* tail = &head;
+
+    LinkedList(typename Node::UPtr head, typename Node::UPtr* tail = nullptr);
+    void add_node_back(typename Node::UPtr new_node);
+    void add_node_front(typename Node::UPtr new_node);
+
+    typename Node::UPtr detach_back();
+    typename Node::UPtr detach_front();
 
 public:
     LinkedList() = default;
@@ -90,7 +98,17 @@ public:
     Iterator cbegin() const;
     Iterator cend() const;
 
-    u32 length() const;
+    u32 size() const;
+    bool empty() const;
+
+    template <typename T>
+    friend LinkedList<T> divide(LinkedList<T> &list);
+
+    template <typename T>
+    friend LinkedList<T> concat(LinkedList<T> &list1, LinkedList<T> &&list2);
+
+    template <typename T>
+    friend void merge_sort(LinkedList<T> &list);
 };
 
 #include "linked_list_impl.hpp"

@@ -17,4 +17,5 @@ add_executable(
     ll_test
     linked_list_impl.hpp linked_list.hpp
     printable_vector.hpp printable.hpp
+    algorithms.hpp
     test.cpp)

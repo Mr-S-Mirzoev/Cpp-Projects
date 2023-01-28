@@ -56,6 +56,59 @@ inline bool LinkedList<DataType>::Iterator::operator==(const Iterator &other) co
 }
 
 template <typename DataType>
+inline LinkedList<DataType>::LinkedList(typename Node::UPtr other_head, typename Node::UPtr* other_tail)
+{
+    tail = (other_head) ? other_tail : &head;
+    head = std::move(other_head);
+}
+
+template <typename DataType>
+inline void LinkedList<DataType>::add_node_back(typename Node::UPtr new_node)
+{
+    *tail = std::move(new_node);
+    tail = &(*tail)->next;
+}
+
+template <typename DataType>
+inline void LinkedList<DataType>::add_node_front(typename Node::UPtr new_node)
+{
+    assert(new_node->next == nullptr);
+
+    new_node->next = std::move(head);
+    head = std::move(new_node);
+
+    // `tail` should always point to nullptr value inside.
+    // other situation happens only when we push_front on an empty node
+    if (*tail)
+        tail = &((*tail)->next);
+}
+
+template <typename DataType>
+inline typename LinkedList<DataType>::Node::UPtr LinkedList<DataType>::detach_back()
+{
+    if (!head) return nullptr;
+
+    typename Node::UPtr *last_node = &head;
+
+    while ((*last_node)->next)
+        last_node = &(*last_node)->next;
+
+    return std::move(*last_node);
+}
+
+template <typename DataType>
+inline typename LinkedList<DataType>::Node::UPtr LinkedList<DataType>::detach_front()
+{
+    if (!head) return nullptr;
+
+    typename Node::UPtr next = std::move(head->next);
+    typename Node::UPtr ret = std::move(head);
+    head = std::move(next);
+
+    return ret;
+}
+
+template <typename DataType>
 inline LinkedList<DataType>::LinkedList(const LinkedList<DataType> &other)
 {
     for (auto it = other.cbegin(); it != other.cend(); ++it)
@@ -111,50 +164,31 @@ inline LinkedList<DataType>& LinkedList<DataType>::operator=(LinkedList<DataType
 template <typename DataType>
 inline void LinkedList<DataType>::push_back(const DataType& element)
 {
-    *tail = std::make_unique<Node>(element);
-    tail = &((*tail)->next);
+    add_node_back(std::make_unique<Node>(element));
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::emplace_back(const DataType&& element)
 {
-    *tail = std::make_unique<Node>(std::move(element));
-    tail = &((tail->get())->next);
+    add_node_back(std::make_unique<Node>(std::move(element)));
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::push_front(const DataType& element)
 {
-    head = std::make_unique<Node>(element, std::move(head));
-
-    // `tail` should always point to nullptr value inside.
-    // other situation happens only when we push_front on an empty node
-    if (*tail)
-        tail = &((*tail)->next);
+    add_node_front(std::make_unique<Node>(element, nullptr));
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::emplace_front(const DataType&& element)
 {
-    head = Node::UPtr(new Node{std::move(element), std::move(head)});
-
-    // `tail` should always point to nullptr value inside.
-    // other situation happens only when we push_front on an empty node
-    if (*tail)
-        tail = &((*tail)->next);
+    add_node_front(std::make_unique<Node>(std::move(element), nullptr));
 }
 
 template <typename DataType>
 inline void LinkedList<DataType>::pop_back()
 {
-    if (!head) return;
-
-    typename Node::UPtr *last_node = &head;
-
-    while ((*last_node)->next)
-        last_node = &(*last_node)->next;
-
-    *last_node = nullptr;
+    detach_back();
 }
 
 template <typename DataType>
@@ -224,11 +258,17 @@ inline typename LinkedList<DataType>::Iterator LinkedList<DataType>::cend() cons
 }
 
 template <typename DataType>
-inline u32 LinkedList<DataType>::length() const
+inline u32 LinkedList<DataType>::size() const
 {
     u32 len = 0;
     for (Node *curr = head.get(); curr; curr = curr->next.get(), ++len);
     return len;
+}
+
+template <typename DataType>
+inline bool LinkedList<DataType>::empty() const
+{
+    return !(head.get());
 }
 
 template <Printable T>
@@ -246,5 +286,5 @@ template <typename DataType>
 template <Iterable IterableType>
 inline bool LinkedList<DataType>::operator==(const IterableType &other) const
 {
-    return std::equal(other.begin(), other.end(), cbegin());
+    return other.size() == size() && std::equal(other.cbegin(), other.cend(), cbegin());
 }
