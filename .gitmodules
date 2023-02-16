@@ -1,6 +1,6 @@
-[submodule "Huobi-Analyzer"]
-	path = Huobi-Analyzer
-	url = git@github.com:Mr-S-Mirzoev/Huobi-Analyzer.git
-[submodule "TechnoSphere"]
-	path = TechnoSphere
-	url = git@github.com:Mr-S-Mirzoev/TechnoSphere.git
+[submodule "VK.Education"]
+	path = VK.Education
+	url = https://github.com/Mr-S-Mirzoev/VK.Education
+[submodule "External Sort"]
+	path = "External Sort"
+	url = https://github.com/Mr-S-Mirzoev/External_Sort

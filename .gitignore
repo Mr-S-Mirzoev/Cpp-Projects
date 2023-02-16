@@ -4,7 +4,12 @@ German Words Trainer/out.csv
 
 # CMake tmp files and directories
 *build/
+*build_debug/
+*build_release/
 *bin/
+*bin_debug/
+*bin_release/
+*lib/
 *CMakeCache.txt
 *CMakeFiles
 

@@ -2,36 +2,35 @@
 
 ## Repository structure
 
-    .
-    ├── For fun - `Implemetations of some problems or ideas that I came up with`
-    │   ├── Filesystem Dirwalk - `may 2020`: Comparisson of recursive and loop-based dirwalks
-    │   ├── German Words Trainer - terminal app (much like lingualeo and similar) for german words
-    │   └── Notifications - `may 2020`: Notifications and dynamic string in terminal for MacOS and Ubuntu
-    ├── Interviews - `Test tasks from interviews`
-    │   ├── Design Patterns: Command - `may 2020`: Command (with redo/undo) used to update structure of company
-    │   ├── Huobi-Analyzer - `august 2020`: analyser for Huobi option with Google benchmark tests
-    │   ├── Multithreading in Matrix Multiplication - `may 2020`
-    │   └── Readers&Writers Problem - `june 2020`
-    ├── Leetcode
-    │   ├── algorithms
-    │   └── concurency
-    ├── Studies - `Tasks from studies at CMC MSU`
-    │   ├── Abstract Types Of Data - `july 2020`: Sequences - list and vector implementation
-    │   ├── Linear algebra Calculator - `may 2020`
-    │   ├── Red&Black tree - `june 2020`
-    │   ├── Solutions for Contests at CMC MSU - `2019 - 2020`
-    │   ├── Sorting Algorithms Comparison - `april 2020`
-    │   └── STL Tutorial for beginners - `february 2020`
-    ├── TechnoSphere - `autumn 2020` : Solutions for Mail.ru Course on C++
-    │   ├── 0. Interview
-    │   ├── 1. Process
-    │   ├── 2. Logger
-    │   ├── 3. TCP Server
-    │   └── Dependencies
-    └── Yandex-Contest - `february 2021` : Solution for Contest for Sirius.ML programm
-        ├── about
-        │   ├── english
-        │   └── russian
-        └── solutions
-            ├── maths
-            └── programming
+- [Interviews](#interviews)  
+- [Leetcode](./Leetcode/)
+- [Studies](#studies)
+- [VK.Education](https://github.com/Mr-S-Mirzoev/VK.Education)
+
+
+<a name="interviews"/>
+
+### Interviews
+
+Here I collect the tasks from the past interviews.
+
+- Command (2020 Q1-Q2 / [AVSoft](https://en.avsw.ru/)): Command (with redo/undo) used to update XML structure of company
+- Readers&Writers Problem (2020 Q1-Q2 / [AVSoft](https://en.avsw.ru/)): Classical synchronization problem solution
+- Multithreading in Matrix Multiplication (2020 Q1-Q2 / [1C](https://www.1c.com/))
+- Beautiful Numbers (2020 Q1-Q2 / [Delta Solutions](https://www.deltasolutions.ru/en)): Quantity of "beautiful" 13-digit numbers in 13-digit system
+- Huobi-Analyzer (2020 Q3-Q4 / [L3 Tech](https://l3tech.io/en/)): Analyser for Huobi option with Google benchmark tests
+
+<a name="studies"/>
+
+### Studies
+
+Here I collect tasks from studies at the Computer Science faculty of MSU
+
+- Solutions for Contests at CMC MSU (2019 - 2020)
+- STL Tutorial for beginners (2020 Q1)
+- Large Numbers Support (2020 Q2)
+- Sorting Algorithms Comparison (2020 Q2)
+- Abstract Types Of Data (2020 Q3)
+- Red&Black tree (2020 Q3)
+- Yandex.Contest (2021 Q2):  Solution for Contest for Sirius.ML program
+- Linear algebra support (2021 Q4): Fast matrix and vector operations and memory-efficient matrix storage
