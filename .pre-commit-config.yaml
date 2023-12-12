@@ -1,0 +1,34 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: trailing-whitespace
+        # Exclude README.md and content/ directory
+        files: ^(?!README\.md|content/).*\.(md|yaml|yml|py|go|mod|sum)$
+    -   id: end-of-file-fixer
+        # Exclude README.md and content/ directory
+        files: ^(?!README\.md|content/).*\.(md|yaml|yml|py|go|mod|sum)$
+-   repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+    -   id: black
+        files: "\\.(py)$"
+        args: [--config=pyproject.toml]
+-   repo: https://github.com/hadialqattan/pycln
+    rev: v2.1.3
+    hooks:
+    -   id: pycln
+        files: "\\.(py)$"
+        args: [--config=pyproject.toml]
+-   repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+    -   id: isort
+        files: "\\.(py)$"
+        args: [--settings-path=pyproject.toml]
+-   repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v16.0.6
+    hooks:
+    -   id: clang-format
+        args: ["-style=file"]
+        files: "\\.(c|cc|cpp|h|hpp|cu|cuh|cpp.in)$"

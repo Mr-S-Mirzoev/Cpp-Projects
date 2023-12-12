@@ -1,5 +1,4 @@
-#ifndef HUOBIANALISER_UPDATE
-#define HUOBIANALISER_UPDATE
+#pragma once
 
 #include "Deps/json.hpp"
 #include <string>
@@ -11,14 +10,14 @@
 
 using nlohmann::json;
 
-class Update {
+class Update
+{
     json info;
     unsigned long long timestamp;
     std::string timeHR;
     bool is_ping = false;
-public:
-    Update (const std::string &s);
-    friend class SnapShot;    
-};
 
-#endif
+public:
+    Update(const std::string& s);
+    friend class SnapShot;
+};

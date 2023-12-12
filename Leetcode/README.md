@@ -4,16 +4,21 @@ All solutions have the supporting test option
 
 ## How to build
 
-    cmake -B build
-    make -C build
+```bash
+cmake -B build
+cmake --build build -j 8
+```
 
 ## How to test
 
 If the solution you're looking for is from algorithms:
 
-    ./bin/algorithms/median_of_two_vectors
+```bash
+./bin/algorithms/median_of_two_vectors
+```
 
 If the solution you're looking for is from concurency:
 
-    ./bin/concurency/print_in_order
-
+```bash
+./bin/concurency/print_in_order
+```

@@ -31,11 +31,11 @@ You may not alter the values in the list's nodes, only nodes themselves may be c
 
     Input: head = [1], k = 1
     Output: [1]
- 
+
 
 ## Constraints:
 
-The number of nodes in the list is in the range sz. 
+The number of nodes in the list is in the range sz.
 
 ```math
 1 <= sz <= 5000

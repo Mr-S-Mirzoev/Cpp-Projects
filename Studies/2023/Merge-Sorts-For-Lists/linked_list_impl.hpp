@@ -18,8 +18,7 @@ LinkedList<DataType>::Node::Node(DataType&& value, Node::UPtr next)
 }
 
 template <typename DataType>
-LinkedList<DataType>::Iterator::Iterator(Node *ptr)
-    : ptr(ptr)
+LinkedList<DataType>::Iterator::Iterator(Node* ptr) : ptr(ptr)
 {
 }
 
@@ -50,13 +49,14 @@ inline DataType& LinkedList<DataType>::Iterator::operator*() const
 }
 
 template <typename DataType>
-inline bool LinkedList<DataType>::Iterator::operator==(const Iterator &other) const
+inline bool LinkedList<DataType>::Iterator::operator==(const Iterator& other) const
 {
     return ptr == other.ptr;
 }
 
 template <typename DataType>
-inline LinkedList<DataType>::LinkedList(typename Node::UPtr other_head, typename Node::UPtr* other_tail)
+inline LinkedList<DataType>::LinkedList(typename Node::UPtr other_head,
+                                        typename Node::UPtr* other_tail)
 {
     tail = (other_head) ? other_tail : &head;
     head = std::move(other_head);
@@ -86,9 +86,10 @@ inline void LinkedList<DataType>::add_node_front(typename Node::UPtr new_node)
 template <typename DataType>
 inline typename LinkedList<DataType>::Node::UPtr LinkedList<DataType>::detach_back()
 {
-    if (!head) return nullptr;
+    if (!head)
+        return nullptr;
 
-    typename Node::UPtr *last_node = &head;
+    typename Node::UPtr* last_node = &head;
 
     while ((*last_node)->next)
         last_node = &(*last_node)->next;
@@ -99,7 +100,8 @@ inline typename LinkedList<DataType>::Node::UPtr LinkedList<DataType>::detach_ba
 template <typename DataType>
 inline typename LinkedList<DataType>::Node::UPtr LinkedList<DataType>::detach_front()
 {
-    if (!head) return nullptr;
+    if (!head)
+        return nullptr;
 
     typename Node::UPtr next = std::move(head->next);
     typename Node::UPtr ret = std::move(head);
@@ -109,30 +111,30 @@ inline typename LinkedList<DataType>::Node::UPtr LinkedList<DataType>::detach_fr
 }
 
 template <typename DataType>
-inline LinkedList<DataType>::LinkedList(const LinkedList<DataType> &other)
+inline LinkedList<DataType>::LinkedList(const LinkedList<DataType>& other)
 {
     for (auto it = other.cbegin(); it != other.cend(); ++it)
         push_back(*it);
 }
 
 template <typename DataType>
-inline LinkedList<DataType>::LinkedList(LinkedList<DataType> &&other)
+inline LinkedList<DataType>::LinkedList(LinkedList<DataType>&& other)
 {
     tail = (other.head) ? other.tail : &head;
     head = std::move(other.head);
 }
 
 template <typename DataType>
-LinkedList<DataType>::LinkedList(const std::initializer_list<DataType> &elements)
+LinkedList<DataType>::LinkedList(const std::initializer_list<DataType>& elements)
 {
-    for (const auto &el : elements)
+    for (const auto& el : elements)
         push_back(el);
 }
 
 template <typename DataType>
-LinkedList<DataType>::LinkedList(std::initializer_list <DataType>&& elements)
+LinkedList<DataType>::LinkedList(std::initializer_list<DataType>&& elements)
 {
-    for (auto &&el : elements)
+    for (auto&& el : elements)
         emplace_back(std::move(el));
 }
 
@@ -144,16 +146,16 @@ LinkedList<DataType>::~LinkedList()
 }
 
 template <typename DataType>
-inline LinkedList<DataType>& LinkedList<DataType>::operator=(const LinkedList<DataType> &other)
+inline LinkedList<DataType>& LinkedList<DataType>::operator=(const LinkedList<DataType>& other)
 {
-    for (const auto &el : other)
+    for (const auto& el : other)
         push_back(el);
 
     return *this;
 }
 
 template <typename DataType>
-inline LinkedList<DataType>& LinkedList<DataType>::operator=(LinkedList<DataType> &&other)
+inline LinkedList<DataType>& LinkedList<DataType>::operator=(LinkedList<DataType>&& other)
 {
     tail = (other.head) ? other.tail : &head;
     head = std::move(other.head);
@@ -194,21 +196,22 @@ inline void LinkedList<DataType>::pop_back()
 template <typename DataType>
 inline void LinkedList<DataType>::pop_front()
 {
-    if (!head) return;
+    if (!head)
+        return;
 
     head = std::move(head->next);
 }
 
 template <typename DataType>
-inline DataType &LinkedList<DataType>::front()
+inline DataType& LinkedList<DataType>::front()
 {
     return head.get()->value;
 }
 
 template <typename DataType>
-inline DataType &LinkedList<DataType>::back()
+inline DataType& LinkedList<DataType>::back()
 {
-    typename Node::UPtr *last_node = &head;
+    typename Node::UPtr* last_node = &head;
 
     while ((*last_node)->next)
         last_node = &(*last_node)->next;
@@ -225,7 +228,7 @@ inline DataType LinkedList<DataType>::front() const
 template <typename DataType>
 inline DataType LinkedList<DataType>::back() const
 {
-    auto *last_node = const_cast<typename Node::UPtr *>(&head);
+    auto* last_node = const_cast<typename Node::UPtr*>(&head);
 
     while ((*last_node)->next)
         last_node = &(*last_node)->next;
@@ -261,7 +264,8 @@ template <typename DataType>
 inline u32 LinkedList<DataType>::size() const
 {
     u32 len = 0;
-    for (Node *curr = head.get(); curr; curr = curr->next.get(), ++len);
+    for (Node* curr = head.get(); curr; curr = curr->next.get(), ++len)
+        ;
     return len;
 }
 
@@ -272,10 +276,10 @@ inline bool LinkedList<DataType>::empty() const
 }
 
 template <Printable T>
-inline std::ostream &operator<<(std::ostream &os, LinkedList<T> &ll)
+inline std::ostream& operator<<(std::ostream& os, LinkedList<T>& ll)
 {
     os << "{ ";
-    for (const auto &el : ll)
+    for (const auto& el : ll)
         os << el << " ";
     os << "}";
 
@@ -284,7 +288,7 @@ inline std::ostream &operator<<(std::ostream &os, LinkedList<T> &ll)
 
 template <typename DataType>
 template <Iterable IterableType>
-inline bool LinkedList<DataType>::operator==(const IterableType &other) const
+inline bool LinkedList<DataType>::operator==(const IterableType& other) const
 {
     return other.size() == size() && std::equal(other.cbegin(), other.cend(), cbegin());
 }

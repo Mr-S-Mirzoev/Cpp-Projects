@@ -1,87 +1,129 @@
 #include <iostream>
 
-bool S_worker (int &i, std::string &s) {
+bool S_worker(int& i, std::string& s)
+{
     bool ret = false;
-    if (s[i] == '0') {
+    if (s[i] == '0')
+    {
         i++;
-    } else if (s[i] == '1') {
+    }
+    else if (s[i] == '1')
+    {
         state = 'A';
         i++;
-    } else {
+    }
+    else
+    {
         ret = true;
     }
     return ret;
 }
 
-bool A_worker (int &i, std::string &s) {
+bool A_worker(int& i, std::string& s)
+{
     bool ret = false;
-    if (s[i] == '0') {
+    if (s[i] == '0')
+    {
         i++;
-    } else if (s[i] == '1') {
+    }
+    else if (s[i] == '1')
+    {
         state = 'S';
         i++;
-    } else if (s[i] == '#') {
+    }
+    else if (s[i] == '#')
+    {
         state = 'B';
         i--;
-    } else {
+    }
+    else
+    {
         ret = true;
     }
     return ret;
 }
 
-bool B_worker (int &i, std::string &s) {
+bool B_worker(int& i, std::string& s)
+{
     bool ret = false;
-    if (s[i] == '0' || s[i] == '1') {
+    if (s[i] == '0' || s[i] == '1')
+    {
         i--;
-    } else if (s[i] == '#') {
+    }
+    else if (s[i] == '#')
+    {
         state = 'C';
         i++;
-    } else {
+    }
+    else
+    {
         ret = true;
     }
     return ret;
 }
 
-bool C_worker (int &i, std::string &s) {
+bool C_worker(int& i, std::string& s)
+{
     bool ret = false;
-    if (s[i] == '0') {
+    if (s[i] == '0')
+    {
         i++;
-    } else if (s[i] == '1') {
+    }
+    else if (s[i] == '1')
+    {
         state = 'D';
         s[i] = '0';
         ret = true;
-    } else {
+    }
+    else
+    {
         ret = true;
     }
     return ret;
 }
 
-int main (void) {
+int main(void)
+{
     std::string s;
     std::cin >> s;
     char state = 'S';
     unsigned i = 1;
-    while (1) {
-        if (state == 'S') {
-            if (S_worker(i, s)) {
+    while (1)
+    {
+        if (state == 'S')
+        {
+            if (S_worker(i, s))
+            {
                 break;
             }
-        } else if (state == 'A') {
-            if (A_worker(i, s)) {
+        }
+        else if (state == 'A')
+        {
+            if (A_worker(i, s))
+            {
                 break;
             }
-        } else if (state == 'B') {
-            if (B_worker(i, s)) {
+        }
+        else if (state == 'B')
+        {
+            if (B_worker(i, s))
+            {
                 break;
             }
-        } else if (state == 'C') {
-            if (C_worker(i, s)) {
+        }
+        else if (state == 'C')
+        {
+            if (C_worker(i, s))
+            {
                 break;
             }
-        } else {
+        }
+        else
+        {
             break;
         }
-        if (i >= s.length()) {
+        if (i >= s.length())
+        {
             break;
         }
     }

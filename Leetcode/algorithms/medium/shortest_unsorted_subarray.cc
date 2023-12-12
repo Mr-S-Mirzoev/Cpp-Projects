@@ -2,14 +2,17 @@
 #include <iterator>
 #include <vector>
 
-class Solution {
+class Solution
+{
 public:
-    int findUnsortedSubarray(std::vector<int>& nums) {
+    int findUnsortedSubarray(std::vector<int>& nums)
+    {
         int sz = nums.size();
         int max = nums[0], min = nums[sz - 1];
         int left_break = -1, right_break = -1;
 
-        for (int i = 0; i < sz; ++i) {
+        for (int i = 0; i < sz; ++i)
+        {
             if (nums[i] < max)
                 right_break = i;
             else
@@ -26,11 +29,12 @@ public:
     }
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     std::vector<int> v(std::istream_iterator<int>(std::cin), std::istream_iterator<int>());
     Solution s;
-    for (auto u : v) {
+    for (auto u : v)
+    {
         std::cout << u << " ";
     }
     std::cout << std::endl << s.findUnsortedSubarray(v) << std::endl;

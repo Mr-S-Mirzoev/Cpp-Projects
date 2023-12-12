@@ -24,7 +24,7 @@ You can return the answer in any order.
 
     Input: s = "barfoofoobarthefoobarman", words = ["bar","foo","the"]
     Output: [6,9,12]
- 
+
 ## Constraints
 
     1 <= s.length <= 104

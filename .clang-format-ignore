@@ -1,0 +1,6 @@
+# # Exclude third-parties check
+# ./test/external
+
+# # Prevent build-directories checks on CI
+# ./build
+# ./bin

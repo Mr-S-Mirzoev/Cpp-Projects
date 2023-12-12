@@ -1,21 +1,22 @@
 #include "Dependencies/random.hpp"
 
+#include "interface.hpp"
 #include "quicksort.hpp"
 #include "random_sequence.hpp"
 #include "shellsort.hpp"
-#include "timer.hpp"
 #include "test.hpp"
-#include "interface.hpp"
+#include "timer.hpp"
 
 #include <cstdlib>
 #include <fstream>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-int main() {
+int main()
+{
     /*
     int n = getRand(5, 20);
-    Lab::Sequence<int> *a = new Lab::ArraySequence<int>; 
+    Lab::Sequence<int> *a = new Lab::ArraySequence<int>;
     SetRandomList<int>(a, -20, 20, n);
     std::string s;
     std::cin >> s;
@@ -26,8 +27,9 @@ int main() {
     std::cout << (csc._correct ? "true" : "false") << std::endl;
     */
     std::string line;
-    while (std::getline(std::cin, line)) {
+    while (std::getline(std::cin, line))
+    {
         act(line);
     }
-    return 0; 
+    return 0;
 }

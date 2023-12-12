@@ -1,10 +1,10 @@
-#ifndef DIGIT_H
-#define DIGIT_H
+#pragma once
 
 class Digit
 {
 private:
     short value_;
+
 public:
     Digit(short value);
     Digit(char char_value);
@@ -12,11 +12,9 @@ public:
     char to_char() const;
     int to_dec() const;
 
-    bool operator< (const Digit &rhs) const;
-    bool operator<= (const Digit &rhs) const;
-    void operator++ ();
+    bool operator<(const Digit& rhs) const;
+    bool operator<=(const Digit& rhs) const;
+    void operator++();
 
     ~Digit() = default;
 };
-
-#endif // DIGIT_H

@@ -2,44 +2,46 @@
 #include <iostream>
 
 using std::cout;
-using std::endl;
 using std::deque;
+using std::endl;
 
 template <typename T>
-std::ostream& operator<<(std::ostream& s, const deque<T>& v) 
+std::ostream& operator<<(std::ostream& s, const deque<T>& v)
 {
     s.put('[');
     char comma[3] = {'\0', ' ', '\0'};
-    for (const auto& e : v) {
+    for (const auto& e : v)
+    {
         s << comma << e;
         comma[0] = ',';
     }
     return s << ']';
 }
- 
+
 int main()
 {
     // c++11 initializer list syntax:
-    deque<std::string> week {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    deque<std::string> week{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
     cout << "Week days: " << week << endl;
- 
+
     // words2 == words1
     deque<std::string> words(week.begin(), week.end());
     cout << "words: " << words << endl;
 
     deque<std::string> words1;
     cout << "words1: " << words1 << endl;
- 
+
     // words2 == words1
     deque<std::string> words2(words);
     cout << "words2: " << words2 << endl;
- 
+
     // words3 is {"Oh", "Ho", "Ho", "Ho", "Ho"}
     deque<std::string> words3(4, "Ho");
     words3.push_front("Oh");
     cout << "words3: " << words3 << endl << endl;
 
-    cout << "EMPTY: words.empty() = " << words.empty() << " words1.empty() = " << words1.empty() << endl;
+    cout << "EMPTY: words.empty() = " << words.empty() << " words1.empty() = " << words1.empty()
+         << endl;
     cout << "SIZE: " << words.size() << " MAX_SZ: " << words.max_size() << endl << endl;
 
     words3.pop_front();

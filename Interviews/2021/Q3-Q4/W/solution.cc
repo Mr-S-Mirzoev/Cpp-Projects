@@ -1,16 +1,19 @@
-#include <set>
 #include <queue>
+#include <set>
 
-class MinFriendlyCRUD {
-    std::set <int> set_;
-    std::queue <std::set<int>::iterator> queue_;
+class MinFriendlyCRUD
+{
+    std::set<int> set_;
+    std::queue<std::set<int>::iterator> queue_;
     std::size_t N_;
-public:
-    MinFriendlyCRUD (std::size_t N):
-        N_(N) {}
 
-    void update(int price) {
-        if (queue_.size() == N_) {
+public:
+    MinFriendlyCRUD(std::size_t N) : N_(N) {}
+
+    void update(int price)
+    {
+        if (queue_.size() == N_)
+        {
             set_.erase(queue_.front());
             queue_.pop();
         }
@@ -22,18 +25,17 @@ public:
             throw std::logic_error("Failed to insert node to tree, possible memory error");
     }
 
-    int getMinPriceInWindow() const {
-        return *set_.cbegin();
-    }
+    int getMinPriceInWindow() const { return *set_.cbegin(); }
 };
 
-enum OpType {
+enum OpType
+{
     INSERT,
     GET,
     EXIT
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     std::size_t N;
     scanf("%lu", &N);
@@ -41,7 +43,8 @@ int main(int argc, char const *argv[])
 
     int op;
 
-    while (1) {
+    while (1)
+    {
         scanf("%d", &op);
 
         switch (op)
@@ -55,7 +58,7 @@ int main(int argc, char const *argv[])
         case GET:
             printf("%d\n", storage.getMinPriceInWindow());
             break;
-        
+
         default:
             return 0;
         }

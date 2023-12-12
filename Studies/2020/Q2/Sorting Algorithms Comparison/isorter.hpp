@@ -4,9 +4,10 @@
 #include "Dependencies/sequence.hpp"
 
 template <typename T>
-class ISorter {
+class ISorter
+{
 public:
-    virtual Lab::Sequence<T> *sort(Lab::Sequence<T> *a, int (*cmp) (T,T)) = 0;
+    virtual Lab::Sequence<T>* sort(Lab::Sequence<T>* a, int (*cmp)(T, T)) = 0;
 };
 
 #endif

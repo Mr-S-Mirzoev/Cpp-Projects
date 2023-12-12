@@ -1,15 +1,24 @@
-#include <vector>
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
 
-#define THROW_EXCEPTION_IN_ASSIGNMENT []() {std::__throw_runtime_error("Unknown ruleKey"); return -1;} ()
+#define THROW_EXCEPTION_IN_ASSIGNMENT                                                              \
+    []()                                                                                           \
+    {                                                                                              \
+        std::__throw_runtime_error("Unknown ruleKey");                                             \
+        return -1;                                                                                 \
+    }()
 
-class Solution {
+class Solution
+{
 public:
-    int countMatches(std::vector<std::vector<std::string>>& items, std::string ruleKey, std::string ruleValue) {
-        int index = (ruleKey == "type")  ? 0 : 
-                    (ruleKey == "color") ? 1 :
-                    (ruleKey == "name")  ? 2 : THROW_EXCEPTION_IN_ASSIGNMENT;
+    int countMatches(std::vector<std::vector<std::string>>& items, std::string ruleKey,
+                     std::string ruleValue)
+    {
+        int index = (ruleKey == "type")    ? 0
+                    : (ruleKey == "color") ? 1
+                    : (ruleKey == "name")  ? 2
+                                           : THROW_EXCEPTION_IN_ASSIGNMENT;
 
         unsigned count = 0;
 
@@ -21,9 +30,10 @@ public:
     }
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
-    std::vector<std::vector<std::string>> items = {{"phone","blue","pixel"},{"computer","silver","lenovo"},{"phone","gold","iphone"}};
+    std::vector<std::vector<std::string>> items = {
+        {"phone", "blue", "pixel"}, {"computer", "silver", "lenovo"}, {"phone", "gold", "iphone"}};
     std::string ruleKey = "color", ruleValue = "silver";
     Solution s;
     std::cout << s.countMatches(items, ruleKey, ruleValue) << std::endl;

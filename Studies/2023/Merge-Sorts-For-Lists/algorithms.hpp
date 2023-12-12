@@ -3,18 +3,19 @@
 #include "linked_list.hpp"
 
 template <typename DataType>
-void merge_sort(LinkedList<DataType> &list);
+void merge_sort(LinkedList<DataType>& list);
 
 template <typename DataType>
-LinkedList<DataType> divide(LinkedList<DataType> &list);
+LinkedList<DataType> divide(LinkedList<DataType>& list);
 
 template <typename DataType>
-LinkedList<DataType> concat(LinkedList<DataType> &list1, LinkedList<DataType> &&list2);
+LinkedList<DataType> concat(LinkedList<DataType>& list1, LinkedList<DataType>&& list2);
 
 template <typename DataType>
-inline void merge_sort(LinkedList<DataType> &list)
+inline void merge_sort(LinkedList<DataType>& list)
 {
-    if (list.empty() || list.head->next == nullptr) return;
+    if (list.empty() || list.head->next == nullptr)
+        return;
 
     auto list_rest = divide(list);
 
@@ -46,10 +47,10 @@ inline void merge_sort(LinkedList<DataType> &list)
 }
 
 template <typename DataType>
-inline LinkedList<DataType> divide(LinkedList<DataType> &list)
+inline LinkedList<DataType> divide(LinkedList<DataType>& list)
 {
-    typename LinkedList<DataType>::Node::UPtr *half = &list.head;
-    typename LinkedList<DataType>::Node *fast = list.head.get();
+    typename LinkedList<DataType>::Node::UPtr* half = &list.head;
+    typename LinkedList<DataType>::Node* fast = list.head.get();
     while (fast && fast->next)
     {
         fast = fast->next->next.get();
@@ -64,7 +65,7 @@ inline LinkedList<DataType> divide(LinkedList<DataType> &list)
 }
 
 template <typename DataType>
-inline LinkedList<DataType> concat(LinkedList<DataType> &list1, LinkedList<DataType> &&list2)
+inline LinkedList<DataType> concat(LinkedList<DataType>& list1, LinkedList<DataType>&& list2)
 {
     *list1.tail = std::move(list2.head);
     list1.tail = list2.tail;
