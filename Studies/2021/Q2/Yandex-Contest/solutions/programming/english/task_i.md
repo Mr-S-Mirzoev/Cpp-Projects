@@ -15,11 +15,11 @@ The rules for scoring points in basketball are as follows:
 the team receives 1 point for a free throw thrown by a free throw;
 for a ball thrown from a close distance, the team receives 2 points;
 for a ball thrown from a long distance, the team gets 3 points.
-If the distance to the basket during the throw was no more than 
+If the distance to the basket during the throw was no more than
 6 meters, then the distance is considered close, otherwise-far. Of course, these are somewhat simplified rules of the game of basketball.
 
 Input format:
-The first line contains an integer 
+The first line contains an integer
 n — the number of goals thrown (1≤n≤1000). The next n lines contain information about the dropped balls. Each line contains two integers t_i and d_i (1≤t_i≤2, -1≤d_i≤20). If d_i≥0, it means that a player from team t_i threw the ball from a distance of d_i meters to the basket. If d_i=-1, it means that the player from the team t_i threw the ball from a free throw.
 
 The format of the output:

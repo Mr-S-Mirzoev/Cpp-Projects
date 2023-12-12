@@ -80,12 +80,12 @@ After I used an implemented thread pool from https://github.com/vit-vit/ctpl and
         BM_ParallelOnProcCount/iterations:10000           61539081 ns     33829332 ns        10000
         BM_Normal/iterations:10000                          411272 ns       410019 ns        10000
 
-3. So I decided to work with a bench of data (roughly splitting all the data between threads at the begining of programm). The formula was as follows: 
+3. So I decided to work with a bench of data (roughly splitting all the data between threads at the begining of programm). The formula was as follows:
 
         unsigned load = ((c.h / threads_q) > 10) ? 10 : (c.h / threads_q);
         unsigned quantity = (c.h % load) ? unsigned(floor(c.h / load)) + 1 :  unsigned(floor(c.h / load));
 
-  Results now seemed more like fun:) 
+  Results now seemed more like fun:)
 
     Load Average: 1.81, 1.68, 1.85
     ------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ After I used an implemented thread pool from https://github.com/vit-vit/ctpl and
     BM_ParallelOnProcCountMinusOne/iterations:10000     648039 ns       153982 ns        10000
     BM_ParallelOnProcCount/iterations:10000             797424 ns       195620 ns        10000
     BM_Normal/iterations:10000                          941707 ns       899438 ns        10000
-  
+
   Here we go))) You're welcome))). Now it's time to find out when will it go tremendous. It looks like here:
   Multiplication of two matrices like that:
   Matrix <__int128_t> a(100, 200, true, INT32_MIN, INT32_MAX), b(200, 120, true, INT32_MIN, INT32_MAX);
@@ -132,7 +132,7 @@ After I used an implemented thread pool from https://github.com/vit-vit/ctpl and
     BM_ParallelOn3Thread/iterations:10000   12325268 ns       681494 ns        10000
     BM_ParallelOn4Thread/iterations:10000   11917118 ns       778733 ns        10000
     BM_ParallelOn5Thread/iterations:10000    4065461 ns       355405 ns        10000
-  
+
   Now I'l distinguish 3 best of them and compare with the normal situation (no multithreading).
 
     Load Average: 1.41, 1.59, 2.65
@@ -148,4 +148,4 @@ After I used an implemented thread pool from https://github.com/vit-vit/ctpl and
 
 ## Conclusion
 
-It is stupidish to do parallelism on small functions. It's way better and clever to do it when you deal with a bench of them. 
+It is stupidish to do parallelism on small functions. It's way better and clever to do it when you deal with a bench of them.

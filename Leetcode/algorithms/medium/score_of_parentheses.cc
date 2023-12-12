@@ -1,17 +1,22 @@
 #include <iostream>
 #include <string>
 
-int count_all(const std::string &s, int &i) {
+int count_all(const std::string& s, int& i)
+{
     int sum = 0;
     int count = 0;
-    while (i < s.length()) {
-        if (s[i] == '(') {
+    while (i < s.length())
+    {
+        if (s[i] == '(')
+        {
             ++count;
             ++i;
             sum += count_all(s, i);
-        } else {
+        }
+        else
+        {
             ++i;
-            
+
             if (count == 0)
                 return 1;
             else
@@ -25,13 +30,18 @@ int count_all(const std::string &s, int &i) {
         return sum * 2;
 }
 
-int root_count_all(const std::string &s, int &i) {
+int root_count_all(const std::string& s, int& i)
+{
     int sum = 0;
-    while (i < s.length()) {
-        if (s[i] == '(') {
+    while (i < s.length())
+    {
+        if (s[i] == '(')
+        {
             ++i;
             sum += count_all(s, i);
-        } else {
+        }
+        else
+        {
             ++i;
             return sum;
         }
@@ -39,20 +49,22 @@ int root_count_all(const std::string &s, int &i) {
     return sum;
 }
 
-class Solution {
+class Solution
+{
 public:
-    int scoreOfParentheses(std::string input) {
+    int scoreOfParentheses(std::string input)
+    {
         int i = 0;
         return root_count_all(input, i);
     }
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     std::string input;
     std::cin >> input;
     Solution s;
     std::cout << s.scoreOfParentheses(input) << std::endl;
-    
+
     return 0;
 }

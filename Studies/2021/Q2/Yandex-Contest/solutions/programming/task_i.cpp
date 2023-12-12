@@ -7,45 +7,57 @@
 
 #include <iostream>
 
-enum ThrowType {
+enum ThrowType
+{
     NEAR,
     FAR,
     PENALTY
 };
 
-enum Team {
+enum Team
+{
     FIRST,
     SECOND
 };
 
-struct Throw {
+struct Throw
+{
     int8_t _team;
     int8_t _throw;
-    Throw (int8_t team = Team::FIRST, int distance = 0): _team(team) {
-        if (distance == -1) {
+    Throw(int8_t team = Team::FIRST, int distance = 0) : _team(team)
+    {
+        if (distance == -1)
+        {
             _throw = ThrowType::PENALTY;
-        } else if (distance <= 6) {
+        }
+        else if (distance <= 6)
+        {
             _throw = ThrowType::NEAR;
-        } else {
+        }
+        else
+        {
             _throw = ThrowType::FAR;
         }
     }
 };
 
-class MatchScore {
-    std::array <int, 2> _score {};
+class MatchScore
+{
+    std::array<int, 2> _score{};
+
 public:
-    void add_throw(const Throw &t) {
+    void add_throw(const Throw& t)
+    {
         switch (t._throw)
         {
         case ThrowType::PENALTY:
             ++_score[t._team];
             break;
-        
+
         case ThrowType::NEAR:
             _score[t._team] += 2;
             break;
-        
+
         case ThrowType::FAR:
             _score[t._team] += 3;
             break;
@@ -56,12 +68,13 @@ public:
         }
     }
 
-    std::string to_string() const {
+    std::string to_string() const
+    {
         return std::to_string(_score[0]) + ":" + std::to_string(_score[1]);
     }
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     std::ifstream input("input.txt");
 
@@ -69,15 +82,21 @@ int main(int argc, char const *argv[])
     MatchScore score;
 
     std::string line;
-    while (std::getline(input, line)) {
+    while (std::getline(input, line))
+    {
         std::istringstream iss(line);
-        if (n == -1) {
-            if (!(iss >> n)) {
+        if (n == -1)
+        {
+            if (!(iss >> n))
+            {
                 break; // error
             }
-        } else {
+        }
+        else
+        {
             int team, distance;
-            if (!(iss >> team >> distance)) {
+            if (!(iss >> team >> distance))
+            {
                 break; // error
             }
 

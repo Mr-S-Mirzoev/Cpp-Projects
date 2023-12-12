@@ -3,13 +3,13 @@
 [File](../task_j.cpp) with C++ solution
 
 # Definition
-    
+
     Time limit 1 second
     Memory limit 512Mb
     Input standard input or input.txt
     Output standard output or output.txt
 
-Petya came up with a strange data transfer protocol. Its essence is that by transmitting the correct message 
+Petya came up with a strange data transfer protocol. Its essence is that by transmitting the correct message
 S, millions of bytes of extra information are added to the data stream. It is assumed that the attacker will break his head until he finds the right part of the message. Innovative? Of course!
 To transmit a secret message, a key is used — a string of digits ABC, where A, B, and C are some positive integers that satisfy the ratio A + B = C.
 

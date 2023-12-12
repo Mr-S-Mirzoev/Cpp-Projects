@@ -7,7 +7,7 @@
 
 typedef uint32_t u32;
 
-template<typename T>
+template <typename T>
 concept Iterable = requires(T t) {
     t.begin();
     t.end();
@@ -54,13 +54,13 @@ public:
     {
     private:
         Node* ptr;
-    public:
 
+    public:
         using iterator_category = std::forward_iterator_tag;
-        using difference_type   = std::ptrdiff_t;
-        using value_type        = DataType;
-        using pointer           = Node*;  // or also value_type*
-        using reference         = DataType&;  // or also value_type&
+        using difference_type = std::ptrdiff_t;
+        using value_type = DataType;
+        using pointer = Node*;       // or also value_type*
+        using reference = DataType&; // or also value_type&
 
         Iterator(Node* ptr);
 
@@ -90,7 +90,7 @@ public:
     bool operator==(const IterableType& other) const;
 
     template <typename U>
-    friend std::ostream& operator<<(std::ostream& os, LinkedList<U> &ll);
+    friend std::ostream& operator<<(std::ostream& os, LinkedList<U>& ll);
 
     Iterator begin();
     Iterator end();
@@ -102,13 +102,13 @@ public:
     bool empty() const;
 
     template <typename T>
-    friend LinkedList<T> divide(LinkedList<T> &list);
+    friend LinkedList<T> divide(LinkedList<T>& list);
 
     template <typename T>
-    friend LinkedList<T> concat(LinkedList<T> &list1, LinkedList<T> &&list2);
+    friend LinkedList<T> concat(LinkedList<T>& list1, LinkedList<T>&& list2);
 
     template <typename T>
-    friend void merge_sort(LinkedList<T> &list);
+    friend void merge_sort(LinkedList<T>& list);
 };
 
 #include "linked_list_impl.hpp"

@@ -1,28 +1,33 @@
-#include <vector>
 #include <iostream>
+#include <vector>
 
-struct TreeNode {
+struct TreeNode
+{
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode* left;
+    TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-class Solution {
+class Solution
+{
 public:
-    std::vector<double> averageOfLevels(TreeNode* root) {
-        std::vector <TreeNode*> current_level;
+    std::vector<double> averageOfLevels(TreeNode* root)
+    {
+        std::vector<TreeNode*> current_level;
         current_level.push_back(root);
-        
-        std::vector <double> averages;
+
+        std::vector<double> averages;
         bool some_not_null = true;
-        while (true) {
+        while (true)
+        {
             double sum = 0.;
             unsigned count = 0;
             for (auto node : current_level)
-                if (node) {
+                if (node)
+                {
                     ++count;
                     sum += node->val;
                 }
@@ -31,10 +36,12 @@ public:
                 break;
             averages.push_back(sum / count);
 
-            std::vector <TreeNode*> next_level;
+            std::vector<TreeNode*> next_level;
 
-            for (auto node : current_level) {
-                if (node) {
+            for (auto node : current_level)
+            {
+                if (node)
+                {
                     next_level.push_back(node->left);
                     next_level.push_back(node->right);
                 }
@@ -47,9 +54,9 @@ public:
     }
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
-    TreeNode *root = new TreeNode(2);
+    TreeNode* root = new TreeNode(2);
     root->left = new TreeNode(4);
     root->right = new TreeNode(15);
     root->left->left = new TreeNode(-3);

@@ -9,4 +9,3 @@
 - есть метод `void update(int price)`
 
 - есть метод `int getMinPriceInWindow()`, который возвращает минимальное значение `price` за последние `N` методов `update`
-

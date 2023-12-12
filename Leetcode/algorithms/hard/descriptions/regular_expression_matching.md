@@ -6,7 +6,7 @@ To see the problem on leetcode website, go [here](https://leetcode.com/problems/
 
 ## Description
 
-    Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*' where: 
+    Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*' where:
 
     '.' Matches any single character.​​​​
     '*' Matches zero or more of the preceding element.
@@ -42,7 +42,7 @@ To see the problem on leetcode website, go [here](https://leetcode.com/problems/
 
     Input: s = "mississippi", p = "mis*is*p*."
     Output: false
- 
+
 ## Constraints
 
 - 0 <= s.length <= 20

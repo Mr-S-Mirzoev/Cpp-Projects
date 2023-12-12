@@ -34,7 +34,7 @@ To see the problem on leetcode website, go [here](https://leetcode.com/problems/
 
     Input: lists = [[]]
     Output: []
- 
+
 ## Constraints
 
 - k == lists.length

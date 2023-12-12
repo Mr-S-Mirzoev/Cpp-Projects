@@ -1,13 +1,13 @@
-#include <iostream>
-#include <mutex>
-#include <thread>
-#include <random>
-#include <string>
-#include <fstream>
 #include <chrono>
+#include <csignal>
 #include <cstdio>
 #include <ctime>
-#include <csignal>
+#include <fstream>
+#include <iostream>
+#include <mutex>
+#include <random>
+#include <string>
+#include <thread>
 
 #define READERS_COUNT 10U
 #define WRITERS_COUNT 5U
@@ -22,7 +22,8 @@ std::mutex no_writers, no_readers, counter_mutex;
 unsigned nreaders = 0;
 
 // Get current date/time, format is YYYY-MM-DD HH:mm:ss
-std::string currentDateTime() {
+std::string currentDateTime()
+{
     time_t now = time(0);
     struct tm tstruct;
     char buf[80];
@@ -31,32 +32,38 @@ std::string currentDateTime() {
     return buf;
 }
 
-int intRand(const int & min, const int & max) {
+int intRand(const int& min, const int& max)
+{
     static thread_local std::mt19937 generator;
-    std::uniform_int_distribution<int> distribution(min,max);
+    std::uniform_int_distribution<int> distribution(min, max);
     return distribution(generator);
 }
 
-void signalHandler( int signum ) {
+void signalHandler(int signum)
+{
     std::cout << "Interrupt signal (" + std::to_string(signum) + ") received.\n";
 
-    std::remove (BUFFER_FILE);
+    std::remove(BUFFER_FILE);
 
-    exit(signum);  
+    exit(signum);
 }
 
-void writer (unsigned j) {
-    for (unsigned i = 0; i < ITER_COUNT; ++i) {
+void writer(unsigned j)
+{
+    for (unsigned i = 0; i < ITER_COUNT; ++i)
+    {
         no_writers.lock();
-            no_readers.lock();
+        no_readers.lock();
         no_writers.unlock();
-        
+
         // writing
         std::ofstream out_file(BUFFER_FILE);
-        if (!(out_file)) {
+        if (!(out_file))
+        {
             throw std::runtime_error("Unable to open file for writing");
         }
-        std::cout << "Writer: " + std::to_string(j) + " Iter: " + std::to_string(i) + " is writing\n";
+        std::cout << "Writer: " + std::to_string(j) + " Iter: " + std::to_string(i) +
+                         " is writing\n";
         out_file << currentDateTime() << std::flush;
         out_file.close();
         std::this_thread::sleep_for(std::chrono::milliseconds(WRITERS_SLEEP_TIME_IN_MILLISECONDS));
@@ -65,83 +72,107 @@ void writer (unsigned j) {
     }
 }
 
-void reader (unsigned j) {
+void reader(unsigned j)
+{
     unsigned prev, current;
-    for (unsigned i = 0; i < ITER_COUNT; ++i) {
+    for (unsigned i = 0; i < ITER_COUNT; ++i)
+    {
         no_writers.lock();
-            counter_mutex.lock();
-                prev = nreaders;
-                ++nreaders;
-                if (!prev) {
-                    no_readers.lock();
-                }
-            counter_mutex.unlock();
+        counter_mutex.lock();
+        prev = nreaders;
+        ++nreaders;
+        if (!prev)
+        {
+            no_readers.lock();
+        }
+        counter_mutex.unlock();
         no_writers.unlock();
 
         // reading
         std::ifstream in_file(BUFFER_FILE);
         bool empty = false;
-        if (!(in_file.is_open())) {
-            if (!(is_empty(in_file))) {
+        if (!(in_file.is_open()))
+        {
+            if (!(is_empty(in_file)))
+            {
                 throw std::runtime_error("Unable to open file for reading");
-            } else {
+            }
+            else
+            {
                 empty = true;
             }
         }
         std::string temp_string;
-        if (!empty) {
+        if (!empty)
+        {
             getline(in_file, temp_string);
             in_file.close();
-            if (temp_string.empty()) {
+            if (temp_string.empty())
+            {
                 temp_string = "File is empty";
             }
-        } else {
+        }
+        else
+        {
             temp_string = "File is not created";
         }
-        std::cout << "\t\tReader: " + std::to_string(j) + "\tIter " + std::to_string(i) + " Reading: \t" + temp_string + "\n";
+        std::cout << "\t\tReader: " + std::to_string(j) + "\tIter " + std::to_string(i) +
+                         " Reading: \t" + temp_string + "\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(READERS_SLEEP_TIME_IN_MILLISECONDS));
 
         counter_mutex.lock();
-            --nreaders;
-            current = nreaders;
-            if (!current) {
-                no_readers.unlock();
-            }
+        --nreaders;
+        current = nreaders;
+        if (!current)
+        {
+            no_readers.unlock();
+        }
         counter_mutex.unlock();
     }
 }
 
-int main () 
+int main()
 {
-    signal(SIGINT, signalHandler); 
-    std::vector <std::thread> threads;
+    signal(SIGINT, signalHandler);
+    std::vector<std::thread> threads;
     unsigned readers = READERS_COUNT, writers = WRITERS_COUNT;
-    
-    for (unsigned j = 0; j < READERS_COUNT + WRITERS_COUNT; ++j) {
-        if (readers == 0) {
+
+    for (unsigned j = 0; j < READERS_COUNT + WRITERS_COUNT; ++j)
+    {
+        if (readers == 0)
+        {
             --writers;
             threads.push_back(std::thread(writer, j));
-        } else if (writers == 0) {
+        }
+        else if (writers == 0)
+        {
             --readers;
             threads.push_back(std::thread(reader, j));
-        } else {
-            if (intRand(0, 1) == 0) {
+        }
+        else
+        {
+            if (intRand(0, 1) == 0)
+            {
                 --writers;
                 threads.push_back(std::thread(writer, j));
-            } else {
+            }
+            else
+            {
                 --readers;
                 threads.push_back(std::thread(reader, j));
             }
         }
     }
-    for (auto &t : threads) {
-        if (t.joinable()) {
+    for (auto& t : threads)
+    {
+        if (t.joinable())
+        {
             t.join();
         }
     }
     readers = READERS_COUNT;
     writers = WRITERS_COUNT;
 
-    std::remove (BUFFER_FILE);
+    std::remove(BUFFER_FILE);
     exit(0);
 }
