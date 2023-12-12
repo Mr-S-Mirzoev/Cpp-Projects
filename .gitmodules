@@ -1,6 +1,3 @@
 [submodule "VK.Education"]
 	path = VK.Education
 	url = https://github.com/Mr-S-Mirzoev/VK.Education
-[submodule "External Sort"]
-	path = "External Sort"
-	url = https://github.com/Mr-S-Mirzoev/External_Sort
