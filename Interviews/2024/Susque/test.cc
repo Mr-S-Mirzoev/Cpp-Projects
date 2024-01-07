@@ -1,4 +1,5 @@
-#include "bank_bot.h"
+#include "solution.h"
+#include "string_conv.h"
 #include <gtest/gtest.h>
 
 // Test fixture for bank bot tests

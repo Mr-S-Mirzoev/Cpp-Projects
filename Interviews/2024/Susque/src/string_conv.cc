@@ -1,6 +1,4 @@
-#include <string_view>
-
-bool int_from_chars(std::string_view int_repr, int& result);
+#include "string_conv.h"
 
 #if __has_include(<charconv>)
 
@@ -15,10 +13,13 @@ bool int_from_chars(std::string_view int_repr, int& result);
 bool int_from_chars(std::string_view int_repr, int& result)
 {
     auto [ptr, ec] = std::from_chars(int_repr.data(), int_repr.data() + int_repr.size(), result);
-    return ec == std::errc();
+    // Check if the conversion was successful and the entire string was consumed
+    return ec == std::errc() && ptr == int_repr.data() + int_repr.size();
 }
 
 #else
+
+#include <cctype>
 
 #if defined(_MSC_VER) && !defined(__clang__)
 #pragma message("Using custom int_from_chars")
