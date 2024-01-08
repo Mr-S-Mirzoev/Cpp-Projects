@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\linked_list_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\linked_list.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\printable_vector.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\printable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\algorithms.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\proga\StudioProjects\Cpp-Projects\Studies\2023\Merge-Sorts-For-Lists\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{DA6602D7-3509-3FE7-8A78-D43D0291564B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{185B6413-2890-3084-83E4-01CB6D48B408}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
