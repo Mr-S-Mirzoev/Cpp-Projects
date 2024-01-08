@@ -118,7 +118,7 @@ inline LinkedList<DataType>::LinkedList(const LinkedList<DataType>& other)
 }
 
 template <typename DataType>
-inline LinkedList<DataType>::LinkedList(LinkedList<DataType>&& other)
+inline LinkedList<DataType>::LinkedList(LinkedList<DataType>&& other) noexcept
 {
     tail = (other.head) ? other.tail : &head;
     head = std::move(other.head);
@@ -155,7 +155,7 @@ inline LinkedList<DataType>& LinkedList<DataType>::operator=(const LinkedList<Da
 }
 
 template <typename DataType>
-inline LinkedList<DataType>& LinkedList<DataType>::operator=(LinkedList<DataType>&& other)
+inline LinkedList<DataType>& LinkedList<DataType>::operator=(LinkedList<DataType>&& other) noexcept
 {
     tail = (other.head) ? other.tail : &head;
     head = std::move(other.head);
@@ -200,6 +200,7 @@ inline void LinkedList<DataType>::pop_front()
         return;
 
     head = std::move(head->next);
+    tail = (head) ? tail : &head;
 }
 
 template <typename DataType>

@@ -1,4 +1,4 @@
-#include "small_test_framework.h"
+#include <gtest/gtest.h>
 
 #include "algorithms.hpp"
 #include "linked_list.hpp"
@@ -6,83 +6,119 @@
 
 #include <sstream>
 
-TEST_MAIN_BEGIN()
+TEST(LinkedList, BasicEmpty)
+{
+    LinkedList<int> ll;
+    EXPECT_TRUE(ll.empty());
+    EXPECT_EQ(ll.size(), 0);
 
-UNIT_TEST_BEGIN(linked_list, basic)
+    ll.push_back(1);
+    EXPECT_FALSE(ll.empty());
+    EXPECT_EQ(ll.size(), 1);
+
+    ll.push_back(2);
+    EXPECT_EQ(ll, PrintableVector<int>({1, 2}));
+}
+
+TEST(LinkedList, BasicNonEmpty)
 {
     LinkedList<int> ll{1, 2, 3, 4, 5};
     EXPECT_EQ(ll.size(), 5);
 
-    PrintableVector<int> ref_val;
-
     ll.push_back(6);
-    ref_val.assign({1, 2, 3, 4, 5, 6});
-    EXPECT_EQ(ll, ref_val);
+    EXPECT_EQ(ll.size(), 6);
+    EXPECT_EQ(ll, PrintableVector<int>({1, 2, 3, 4, 5, 6}));
 
     ll.push_front(0);
-    ref_val.assign({0, 1, 2, 3, 4, 5, 6});
-    EXPECT_EQ(ll, ref_val);
+    EXPECT_EQ(ll.size(), 7);
+    EXPECT_EQ(ll, PrintableVector<int>({0, 1, 2, 3, 4, 5, 6}));
 }
-UNIT_TEST_END(linked_list, basic)
 
-UNIT_TEST_BEGIN(linked_list, pop_push)
+TEST(LinkedList, BasicAccessors)
 {
     LinkedList<int> ll{1, 2, 3};
     EXPECT_EQ(ll.front(), 1);
     EXPECT_EQ(ll.back(), 3);
     EXPECT_EQ(ll.size(), 3);
 
-    PrintableVector<int> ref_val;
+    ll.front() = 4;
 
-    ll.pop_back();
-    ref_val.assign({1, 2});
-    EXPECT_EQ(ll.front(), 1);
-    EXPECT_EQ(ll.back(), 2);
-    EXPECT_EQ(ll, ref_val);
+    EXPECT_EQ(ll.front(), 4);
+    EXPECT_EQ(ll.back(), 3);
+    EXPECT_EQ(ll.size(), 3);
 
-    ll.pop_front();
-    ref_val.assign({2});
-    EXPECT_EQ(ll.front(), 2);
-    EXPECT_EQ(ll.back(), 2);
-    EXPECT_EQ(ll, ref_val);
+    ll.back() = 5;
+
+    EXPECT_EQ(ll.front(), 4);
+    EXPECT_EQ(ll.back(), 5);
+    EXPECT_EQ(ll.size(), 3);
+
+    EXPECT_EQ(ll, PrintableVector<int>({4, 2, 5}));
+}
+
+TEST(LinkedList, Copy)
+{
+    LinkedList<int> ll{1, 2, 3};
+    LinkedList<int> ll_copy{ll};
+
+    EXPECT_EQ(ll_copy.front(), 1);
+    EXPECT_EQ(ll_copy.back(), 3);
+    EXPECT_EQ(ll_copy.size(), 3);
+
+    ll_copy.front() = 4;
+
+    EXPECT_EQ(ll_copy.front(), 4);
+    EXPECT_EQ(ll_copy.back(), 3);
+    EXPECT_EQ(ll_copy.size(), 3);
+
+    EXPECT_EQ(ll, PrintableVector<int>({1, 2, 3}));
+    EXPECT_EQ(ll_copy, PrintableVector<int>({4, 2, 3}));
+}
+
+TEST(LinkedList, PopPush)
+{
+    LinkedList<int> ll{1, 2, 3};
     EXPECT_FALSE(ll.empty());
 
-    {
-        const LinkedList<int> ll_copy{ll};
-        EXPECT_EQ(ll_copy.front(), 2);
-        EXPECT_EQ(ll_copy.back(), 2);
-    }
+    ll.pop_back();
+    EXPECT_EQ(ll.front(), 1);
+    EXPECT_EQ(ll.back(), 2);
 
     ll.pop_front();
-    ref_val.clear();
-    EXPECT_EQ(ll, ref_val);
+
+    EXPECT_EQ(ll.front(), 2);
+    EXPECT_EQ(ll.back(), 2);
+
+    ll.pop_front();
     EXPECT_TRUE(ll.empty());
 
-    ll = {1};
+    ll.push_back(-1);
+    EXPECT_EQ(ll.front(), -1);
+    EXPECT_EQ(ll.back(), -1);
+    EXPECT_FALSE(ll.empty());
+
+    ll.push_front(-2);
+    EXPECT_EQ(ll.front(), -2);
+    EXPECT_EQ(ll.back(), -1);
+    EXPECT_FALSE(ll.empty());
+
+    EXPECT_EQ(ll, PrintableVector<int>({-2, -1}));
+
     ll.pop_back();
-    EXPECT_EQ(ll, ref_val);
-    EXPECT_TRUE(ll.empty());
+    EXPECT_EQ(ll.front(), -2);
+    EXPECT_EQ(ll.back(), -2);
+    EXPECT_FALSE(ll.empty());
 
-    ll.push_back(1);
     ll.pop_back();
-    EXPECT_EQ(ll, ref_val);
     EXPECT_TRUE(ll.empty());
 
-    ll = {};
-    EXPECT_EQ(ll, ref_val);
-    EXPECT_TRUE(ll.empty());
-
-    ll.push_back(2);
-    ref_val.assign({2});
-    EXPECT_EQ(ll, ref_val);
-
-    ll.emplace_back(4);
-    ref_val.assign({2, 4});
-    EXPECT_EQ(ll, ref_val);
+    ll.push_front(1);
+    EXPECT_EQ(ll.front(), 1);
+    EXPECT_EQ(ll.back(), 1);
+    EXPECT_FALSE(ll.empty());
 }
-UNIT_TEST_END(linked_list, pop_push)
 
-UNIT_TEST_BEGIN(linked_list, divide_and_concat)
+TEST(LinkedList, DivideAndConcat)
 {
     {
         LinkedList<int> ll{1, 2, 3};
@@ -120,9 +156,8 @@ UNIT_TEST_BEGIN(linked_list, divide_and_concat)
         EXPECT_TRUE(half.empty());
     }
 }
-UNIT_TEST_END(linked_list, divide_and_concat)
 
-UNIT_TEST_BEGIN(linked_list, sort)
+TEST(LinkedList, Sort)
 {
     {
         LinkedList<int> ll{1, 2, 3, 4, 5};
@@ -142,15 +177,11 @@ UNIT_TEST_BEGIN(linked_list, sort)
         EXPECT_EQ(ll, ref_val);
     }
 }
-UNIT_TEST_END(linked_list, sort)
 
-UNIT_TEST_BEGIN(linked_list, print)
+TEST(LinkedList, Print)
 {
     LinkedList<int> ll{1, 2, 3, 4, 5};
     std::stringstream ss;
     ss << ll;
     EXPECT_EQ(ss.str(), "{ 1 2 3 4 5 }");
 }
-UNIT_TEST_END(linked_list, print)
-
-TEST_MAIN_END()

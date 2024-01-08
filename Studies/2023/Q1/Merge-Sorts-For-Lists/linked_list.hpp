@@ -42,13 +42,13 @@ private:
 public:
     LinkedList() = default;
     LinkedList(const LinkedList<DataType>& other);
-    LinkedList(LinkedList<DataType>&& other);
+    LinkedList(LinkedList<DataType>&& other) noexcept;
     LinkedList(const std::initializer_list<DataType>& elements);
     LinkedList(std::initializer_list<DataType>&& elements);
     ~LinkedList();
 
     LinkedList<DataType>& operator=(const LinkedList<DataType>& other);
-    LinkedList<DataType>& operator=(LinkedList<DataType>&& other);
+    LinkedList<DataType>& operator=(LinkedList<DataType>&& other) noexcept;
 
     class Iterator
     {
