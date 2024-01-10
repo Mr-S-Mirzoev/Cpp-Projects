@@ -3,18 +3,16 @@
 #include <map>
 #include <vector>
 
-template <typename T>
+enum class ImplementationType
+{
+    MapBased,
+    VectorBased
+};
+
+template <typename T, ImplementationType Impl>
 class SparseVector
 {
-    std::map<std::size_t, T> data_{};
-    std::size_t size_ = 0;
-
-public:
-    SparseVector() = default;
-
-    SparseVector(std::vector<T> const& v);
-    SparseVector(SparseVector const& other);
-
-    std::vector<T> get() const;
-    SparseVector& operator+=(SparseVector const& other);
 };
+
+#include "sparse_vector_m.impl.h"
+#include "sparse_vector_v.impl.h"

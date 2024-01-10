@@ -1,7 +1,37 @@
+#pragma once
+
 #include "sparse_vector.h"
 
+#include <stdexcept>
+
 template <typename T>
-SparseVector<T>::SparseVector(std::vector<T> const& v) : size(v.size())
+using SparseVectorMBased = SparseVector<T, ImplementationType::MapBased>;
+
+template <typename T>
+class SparseVector<T, ImplementationType::MapBased>
+{
+    std::map<std::size_t, T> data_{};
+    std::size_t size_ = 0;
+
+public:
+    SparseVector() = default;
+
+    SparseVector(std::vector<T> const& v);
+    SparseVector(SparseVector const& other);
+
+    std::vector<T> get() const;
+    SparseVector& operator+=(SparseVector const& other);
+
+    friend SparseVector operator+(SparseVector const& lhs, SparseVector const& rhs)
+    {
+        SparseVector res = lhs;
+        res += rhs;
+        return res;
+    }
+};
+
+template <typename T>
+SparseVectorMBased<T>::SparseVector(std::vector<T> const& v) : size_(v.size())
 {
     for (int i = 0; i < size_; ++i)
     {
@@ -13,14 +43,15 @@ SparseVector<T>::SparseVector(std::vector<T> const& v) : size(v.size())
 }
 
 template <typename T>
-SparseVector<T>::SparseVector(SparseVector const& other) : data_(other.data_), size_(other.size_)
+SparseVectorMBased<T>::SparseVector(SparseVector const& other)
+    : data_(other.data_), size_(other.size_)
 {
 }
 
 template <typename T>
-std::vector<T> SparseVector<T>::get() const
+std::vector<T> SparseVectorMBased<T>::get() const
 {
-    std::vector<T> res{size, T{}};
+    std::vector<T> res(size_);
     for (const auto& [i, el] : data_)
     {
         res[i] = el;
@@ -30,7 +61,7 @@ std::vector<T> SparseVector<T>::get() const
 }
 
 template <typename T>
-SparseVector<T>& SparseVector<T>::operator+=(SparseVector const& other)
+SparseVectorMBased<T>& SparseVectorMBased<T>::operator+=(SparseVector const& other)
 {
     if (size_ != other.size_)
     {
@@ -43,7 +74,7 @@ SparseVector<T>& SparseVector<T>::operator+=(SparseVector const& other)
         return *this;
     }
 
-    if (other.empty())
+    if (other.data_.empty())
     {
         return *this;
     }
@@ -53,10 +84,15 @@ SparseVector<T>& SparseVector<T>::operator+=(SparseVector const& other)
 
     while (it != data_.end() && other_it != other.data_.end())
     {
+        if (it->first < other_it->first)
+        {
+            ++it;
+            continue;
+        }
+
         if (it->first > other_it->first)
         {
             data_.emplace_hint(it, other_it->first, other_it->second);
-            ++other_it;
         }
         else if (it->first == other_it->first)
         {
@@ -69,12 +105,9 @@ SparseVector<T>& SparseVector<T>::operator+=(SparseVector const& other)
             {
                 ++it;
             }
-            ++other_it;
         }
-        else
-        {
-            ++it;
-        }
+
+        ++other_it;
     }
 
     while (other_it != other.data_.end())
