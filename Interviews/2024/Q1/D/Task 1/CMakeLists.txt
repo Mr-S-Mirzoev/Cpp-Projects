@@ -1,14 +1,14 @@
 # Define the test executable
-add_executable(test_executable unittest.cpp)
+add_executable(sparse_vector_test unittest.cpp)
 
 # Link the test executable against the Google Test library
-target_link_libraries(test_executable gtest_main)
+target_link_libraries(sparse_vector_test gtest_main)
 
 # Add the solution include directory to the test executable
-target_include_directories(test_executable PRIVATE ${CMAKE_SOURCE_DIR})
+target_include_directories(sparse_vector_test PRIVATE ${CMAKE_SOURCE_DIR})
 
 # Define a test for CTest to run
 add_test(
     NAME GoogleTestBasedTest
-    COMMAND test_executable
+    COMMAND sparse_vector_test
 )
