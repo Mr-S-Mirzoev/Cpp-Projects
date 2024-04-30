@@ -44,7 +44,7 @@ foreach(i RANGE ${list_max_index})
 
         # All the sources to be linked
         set(SOURCE_FILES 
-            ${THIS_DIR}/${LEVEL_NAME}/${TARGET_NAME}.cpp
+            ${THIS_DIR}/${LEVEL_NAME}/${TARGET_NAME}.cc
         )
 
         # Create an executable from the source files
