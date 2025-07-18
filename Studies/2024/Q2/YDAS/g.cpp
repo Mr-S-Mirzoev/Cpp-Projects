@@ -27,10 +27,9 @@ auto compute_distances_and_times( const std::vector<SpeedInfo>& speedInfos ) {
     points.reserve( speedInfos.size() + 1 );
 
     long long current_distance = 0;
-    long long current_time = 0;
     long long current_velocity = 0;
 
-    points.push_back( { current_time, current_distance, current_velocity, speedInfos[0].a } );
+    points.push_back( { 0, current_distance, current_velocity, speedInfos[0].a } );
 
     for ( std::size_t i = 0; i < speedInfos.size(); i++ ) {
         const auto [l, r, a] = speedInfos[i];
@@ -43,9 +42,10 @@ auto compute_distances_and_times( const std::vector<SpeedInfo>& speedInfos ) {
         }
 
         current_distance += distance;
-        current_time = r;
-        points.push_back( { current_time, current_distance, current_velocity,
-                            ( i != speedInfos.size() - 1 ) ? speedInfos[i + 1].a : 0 } );
+
+        const int current_time = r;
+        const int next_acceleration = ( i + 1 < speedInfos.size() ) ? speedInfos[i + 1].a : 0;
+        points.push_back( { current_time, current_distance, current_velocity, next_acceleration } );
     }
 
     return points;
